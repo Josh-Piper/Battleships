@@ -6,7 +6,3 @@ This application is developed in accordance to Development Project 1 for Swinbur
 
 Please refer to the Wiki.
 
-## To Do
--  Create Game
--  Create Wiki
--  Unit Test 
