@@ -221,7 +221,7 @@ namespace MyGame
 
                 case var case4 when case4 == ResultOfAttack.ShotAlready:
                     {
-                        Audio.PlaySoundEffect(GameSound["Error"]);
+                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
                         break;
                     }
             }
