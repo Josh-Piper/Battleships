@@ -1,8 +1,8 @@
 # Battleships
 
 ## About
-Swinburne Battleships Game
-This application is developed in accordance to Development Project 1 for Swinburne University. The application is created by several University students, to view more information regarding the program. 
+#Swinburne Battleships Game
+#This application is developed in accordance to Development Project 1 for Swinburne University. The application is created by several University students, to view more information regarding the program. 
 
-Please refer to the Wiki.
+#Please refer to the Wiki.
 
