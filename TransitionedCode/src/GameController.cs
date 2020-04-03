@@ -104,8 +104,10 @@ namespace MyGame
             _human = new Player(_theGame);
 
             // AddHandler _human.PlayerGrid.Changed, AddressOf GridChanged
-            global::GameController._ai.PlayerGrid.Changed += GridChanged;
-            global::GameController._theGame.AttackCompleted += AttackCompleted;
+            //global::GameController._ai.PlayerGrid.Changed += GridChanged;
+            //global::GameController._theGame.AttackCompleted += AttackCompleted;
+            _theGame.AttackCompleted += AttackCompleted;
+            _ai.PlayerGrid.Changed += GridChanged;
             AddNewState(GameState.Deploying);
         }
 
@@ -116,8 +118,10 @@ namespace MyGame
         private static void EndGame()
         {
             // RemoveHandler _human.PlayerGrid.Changed, AddressOf GridChanged
-            global::GameController._ai.PlayerGrid.Changed -= GridChanged;
-            global::GameController._theGame.AttackCompleted -= AttackCompleted;
+            //global::GameController._ai.PlayerGrid.Changed -= GridChanged;
+            _ai.PlayerGrid.Changed -= GridChanged;
+            //global::GameController._theGame.AttackCompleted -= AttackCompleted;
+            _theGame.AttackCompleted -= AttackCompleted;
         }
 
         /// <summary>

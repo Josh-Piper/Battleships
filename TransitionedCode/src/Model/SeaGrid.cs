@@ -19,7 +19,7 @@ namespace MyGame
     {
         private const int _WIDTH = 10;
         private const int _HEIGHT = 10;
-        private Tile[,] _GameTiles = new Tile[Width, Height];
+        private Tile[,] _GameTiles;// = new Tile[Width, Height];
         private Dictionary<ShipName, Ship> _Ships;
         private int _ShipsKilled = 0;
 
@@ -121,7 +121,7 @@ namespace MyGame
         /// <param name="direction">the direction the ship is going</param>
         public void MoveShip(int row, int col, ShipName ship, Direction direction)
         {
-            var newShip = this._Ships(ship);
+            var newShip = _Ships[ship];
             newShip.Remove();
             AddShip(row, col, direction, newShip);
         }
@@ -143,6 +143,7 @@ namespace MyGame
                 int dRow, dCol;
                 if (direction == direction.LeftRight)
                 {
+
                     dRow = 0;
                     dCol = 1;
                 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SwinGameSDK;
 using static SwinGameSDK.SwinGame;
-
+//Dictionary fixes need to be applied to get key of name and add ship
 namespace MyGame
 {
     /// <summary>
@@ -130,7 +130,7 @@ namespace MyGame
         {
             if (name == ShipName.None)
                 return default;
-            return this._Ships(name);
+            return _Ships[name];
         }
 
         /// <summary>
