@@ -15,7 +15,7 @@ namespace MyGame
     using System.Collections;
     using System.Collections.Generic;
 
-    public class Player : IEnumerable<Ship>
+    public class Player : IEnumerable
     {
         protected static Random _Random = new Random();
         private Dictionary<ShipName, Ship> _Ships = new Dictionary<ShipName, Ship>();

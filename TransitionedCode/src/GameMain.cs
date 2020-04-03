@@ -22,14 +22,14 @@ namespace MyGame
             // Game Loop
             do
             {
-                HandleUserInput();
-                DrawScreen();
+                GameController.HandleUserInput();
+                GameController.DrawScreen();
             }
-            while (!(SwinGame.WindowCloseRequested() == true | CurrentState == GameState.Quitting));
+            while (!(SwinGame.WindowCloseRequested() == true | GameController.CurrentState == GameState.Quitting));
             SwinGame.StopMusic();
 
             // Free Resources and Close Audio, to end the program.
-            FreeResources();
+            GameResources.FreeResources();
         }
     }
 }
