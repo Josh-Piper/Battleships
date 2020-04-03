@@ -17,7 +17,7 @@ namespace MyGame
             // Load Resources
             
             GameResources.LoadResources();
-            SwinGame.PlayMusic(GameResources.GameMusic["Background"]);
+            SwinGame.PlayMusic(GameResources.GameMusic("Background"));
 
             // Game Loop
             do
