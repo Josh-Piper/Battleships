@@ -151,7 +151,7 @@ namespace MyGame
                     default:
                         {
                             throw new ApplicationException("AI has gone in an invalid state");
-                            break;
+                            //break;
                         }
                 }
             }
@@ -221,7 +221,7 @@ namespace MyGame
                 case var case3 when case3 == ResultOfAttack.ShotAlready:
                     {
                         throw new ApplicationException("Error in AI");
-                        break;
+                        //break;
                     }
             }
 
