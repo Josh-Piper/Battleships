@@ -40,6 +40,13 @@ namespace MyGame
                 return _WIDTH;
             }
         }
+        public TileView this[int col, int row]
+        {
+            get { return _GameTiles[,]; }
+        }
+
+
+
 
         /// <summary>
         /// The height of the sea grid
@@ -64,6 +71,11 @@ namespace MyGame
                 return _ShipsKilled;
             }
         }
+
+        
+
+        
+
 
         /// <summary>
         /// Show the tile view

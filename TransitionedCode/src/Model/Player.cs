@@ -19,12 +19,8 @@ namespace MyGame
     {
         protected static Random _Random = new Random();
         private Dictionary<ShipName, Ship> _Ships = new Dictionary<ShipName, Ship>();
-        private SeaGrid _playerGrid = new SeaGrid(_Ships);
-        private ISeaGrid _enemyGrid;
         protected BattleShipsGame _game;
-        private int _shots;
-        private int _hits;
-        private int _misses;
+        private SeaGrid _playerGrid;
 
         /// <summary>
         /// Returns the game that the player is part of.
@@ -52,13 +48,14 @@ namespace MyGame
         {
             set
             {
-                _enemyGrid = value;
+                EnemyGrid = value;
             }
         }
 
         public Player(BattleShipsGame controller)
         {
             _game = controller;
+             _playerGrid = new SeaGrid(_Ships);
 
             // for each ship add the ships name so the seagrid knows about them
             foreach (ShipName name in Enum.GetValues(typeof(ShipName)))
@@ -75,29 +72,12 @@ namespace MyGame
         /// <summary>
         /// The EnemyGrid is a ISeaGrid because you shouldn't be allowed to see the enemies ships
         /// </summary>
-        public ISeaGrid EnemyGrid
-        {
-            get
-            {
-                return _enemyGrid;
-            }
-
-            set
-            {
-                _enemyGrid = value;
-            }
-        }
+        public ISeaGrid EnemyGrid { get; set; }
 
         /// <summary>
         /// The PlayerGrid is just a normal SeaGrid where the players ships can be deployed and seen
         /// </summary>
-        public SeaGrid PlayerGrid
-        {
-            get
-            {
-                return _playerGrid;
-            }
-        }
+        public SeaGrid PlayerGrid { get { return _playerGrid; } } 
 
         /// <summary>
         /// ReadyToDeploy returns true if all ships are deployed
@@ -106,7 +86,7 @@ namespace MyGame
         {
             get
             {
-                return _playerGrid.AllDeployed;
+                return PlayerGrid.AllDeployed;
             }
         }
 
@@ -115,7 +95,7 @@ namespace MyGame
             get
             {
                 // Check if all ships are destroyed... -1 for the none ship
-                return _playerGrid.ShipsKilled == Enum.GetValues(typeof(ShipName)).Length - 1;
+                return PlayerGrid.ShipsKilled == Enum.GetValues(typeof(ShipName)).Length - 1;
             }
         }
 
@@ -138,34 +118,16 @@ namespace MyGame
         /// </summary>
         /// <value>shots taken</value>
         /// <returns>teh number of shots taken</returns>
-        public int Shots
-        {
-            get
-            {
-                return _shots;
-            }
-        }
+        public int Shots { get; private set; }
 
-        public int Hits
-        {
-            get
-            {
-                return _hits;
-            }
-        }
+        public int Hits { get; private set; }
 
         /// <summary>
         /// Total number of shots that missed
         /// </summary>
         /// <value>miss count</value>
         /// <returns>the number of shots that have missed ships</returns>
-        public int Missed
-        {
-            get
-            {
-                return _misses;
-            }
-        }
+        public int Missed { get; private set; }
 
         public int Score
         {
@@ -227,7 +189,7 @@ namespace MyGame
         /// <returns>the result of the attack</returns>
         internal AttackResult Shoot(int row, int col)
         {
-            _shots += 1;
+            Shots += 1;
             AttackResult result;
             result = EnemyGrid.HitTile(row, col);
             var switchExpr = result.Value;
@@ -236,13 +198,13 @@ namespace MyGame
                 case var @case when @case == ResultOfAttack.Destroyed:
                 case var case1 when case1 == ResultOfAttack.Hit:
                     {
-                        _hits += 1;
+                        Hits += 1;
                         break;
                     }
 
                 case var case2 when case2 == ResultOfAttack.Miss:
                     {
-                        _misses += 1;
+                        Missed += 1;
                         break;
                     }
             }

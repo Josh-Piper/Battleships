@@ -74,6 +74,11 @@ namespace MyGame
             }
         }
 
+        public TileView this[int row, int col]
+        {
+            get;
+        }
+
         /// <summary>
         /// Get the height of the tile
         /// </summary>
