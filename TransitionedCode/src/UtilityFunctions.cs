@@ -199,7 +199,7 @@ namespace MyGame
 
                 if (!small)
                 {
-                    SwinGame.DrawBitmap(GameImage[shipName], colLeft, rowTop);
+                    SwinGame.DrawBitmap(GameResources.GameImage(shipName), colLeft, rowTop);
                 }
                 else
                 {
@@ -234,7 +234,7 @@ namespace MyGame
         /// </summary>
         public static void DrawMessage()
         {
-            SwinGame.DrawText(Message, MESSAGE_COLOR, GameFont["Courier"], FIELD_LEFT, MESSAGE_TOP);
+            SwinGame.DrawText(Message, MESSAGE_COLOR, GameResources.GameFont("Courier"), FIELD_LEFT, MESSAGE_TOP);
         }
 
         /// <summary>
@@ -242,7 +242,7 @@ namespace MyGame
         /// </summary>
         public static void DrawBackground()
         {
-            var switchExpr = CurrentState;
+            var switchExpr = GameController.CurrentState;
             switch (switchExpr)
             {
                 case var @case when @case == GameState.ViewingMainMenu:
@@ -250,20 +250,20 @@ namespace MyGame
                 case var case2 when case2 == GameState.AlteringSettings:
                 case var case3 when case3 == GameState.ViewingHighScores:
                     {
-                        SwinGame.DrawBitmap(GameImage["Menu"], 0, 0);
+                        SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
                         break;
                     }
 
                 case var case4 when case4 == GameState.Discovering:
                 case var case5 when case5 == GameState.EndingGame:
                     {
-                        SwinGame.DrawBitmap(GameImage["Discovery"], 0, 0);
+                        SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
                         break;
                     }
 
                 case var case6 when case6 == GameState.Deploying:
                     {
-                        SwinGame.DrawBitmap(GameImage["Deploy"], 0, 0);
+                        SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
                         break;
                     }
 
@@ -293,7 +293,7 @@ namespace MyGame
         {
             Sprite s;
             Bitmap imgObj;
-            imgObj = GameImage[image];
+            imgObj = GameResources.GameImage(image);
             imgObj.SetCellDetails(40, 40, 3, 3, 7);
             AnimationScript animation;
             animation = SwinGame.LoadAnimationScript("splash.txt");
@@ -310,7 +310,7 @@ namespace MyGame
             foreach (Sprite s in _Animations)
             {
                 SwinGame.UpdateSprite(s);
-                if (s.animationHasEnded)
+                if (s.AnimationHasEnded)
                 {
                     ended.Add(s);
                 }
@@ -335,7 +335,7 @@ namespace MyGame
             for (i = 1; i <= ANIMATION_CELLS * FRAMES_PER_CELL; i++)
             {
                 UpdateAnimations();
-                DrawScreen();
+                GameController.DrawScreen();
             }
         }
     }
