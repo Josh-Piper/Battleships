@@ -141,7 +141,7 @@ namespace MyGame
                 int currentRow = row;
                 int currentCol = col;
                 int dRow, dCol;
-                if (direction == direction.LeftRight)
+                if (direction == Direction.LeftRight)
                 {
 
                     dRow = 0;

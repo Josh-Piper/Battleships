@@ -119,7 +119,7 @@ namespace MyGame
                     var fillColor = default(Color);
                     bool draw;
                     draw = true;
-                    var switchExpr = grid.Item(row, col);
+                    var switchExpr = grid.Item;
                     switch (switchExpr)
                     {
                         case var @case when @case == TileView.Ship:
