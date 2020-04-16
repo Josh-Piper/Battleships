@@ -1,15 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
+﻿
+namespace MyGame {
 
-namespace MyGame
-{
+    public enum GameState {
 
-    public enum GameState
-    {
         /// <summary>
         /// The player is viewing the main menu.
         /// </summary>
@@ -49,5 +42,7 @@ namespace MyGame
         /// The player has quit. Show ending credits and terminate the game
         /// </summary>
         Quitting
+
     }
+
 }

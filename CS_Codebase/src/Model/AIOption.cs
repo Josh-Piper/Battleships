@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
-using System.Text;
+﻿
+namespace MyGame {
 
-namespace MyGame
-{
     /// <summary>
     /// The different AI levels.
     /// </summary>
-
-    public enum AIOption
-    {
+    public enum AIOption {
         /// <summary>
         /// Easy, total random shooting
         /// </summary>
