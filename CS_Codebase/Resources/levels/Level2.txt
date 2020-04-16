@@ -1,0 +1,39 @@
+UIElements {
+	BtnMenu: 0, 0;
+}
+
+GameObjects {
+	Tile: 2, 7, Dirt, true;
+	Tile: 3, 7, Dirt, true;
+	Tile: 3, 7, Dirt, true;
+	Tile: 4, 7, Dirt, true;
+	Tile: 4, 7, Dirt, true;
+	Tile: 5, 7, Dirt, true;
+	Tile: 6, 7, Dirt, true;
+	Tile: 7, 7, Dirt, true;
+	Tile: 7, 7, Dirt, true;
+	Tile: 8, 7, Dirt, true;
+	Tile: 8, 7, Dirt, true;
+	Tile: 9, 7, Dirt, true;
+	Tile: 9, 7, Dirt, true;
+	Tile: 10, 7, Dirt, true;
+	Tile: 10, 7, Dirt, true;
+	Tile: 11, 7, Dirt, true;
+	Tile: 11, 7, Dirt, true;
+	Tile: 12, 7, Dirt, true;
+	Tile: 12, 7, Dirt, true;
+	Tile: 13, 7, Dirt, true;
+	Tile: 13, 7, Dirt, true;
+	Tile: 14, 7, Dirt, true;
+	Tile: 14, 7, Dirt, true;
+	Tile: 15, 7, Dirt, true;
+	Tile: 15, 7, Dirt, true;
+	Tile: 16, 7, Dirt, true;
+	Tile: 16, 7, Dirt, true;
+	Tile: 17, 7, Dirt, true;
+	Tile: 17, 7, Dirt, true;
+	Tile: 18, 7, Dirt, true;
+	Tile: 19, 7, Dirt, true;
+	Player: 4, 5;
+	Player: 12, 5;
+}

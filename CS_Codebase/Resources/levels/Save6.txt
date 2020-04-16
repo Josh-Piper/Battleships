@@ -1,0 +1,8 @@
+
+UIElements {
+	BtnMenu: 0, 0;
+}
+
+GameObjects {
+	Tile: 5, 1, Dirt, true;
+}
