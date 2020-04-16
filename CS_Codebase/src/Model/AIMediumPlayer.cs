@@ -5,8 +5,7 @@ using System.Text;
 using SwinGameSDK;
 using static SwinGameSDK.SwinGame;
 
-namespace MyGame
-{
+namespace MyGame {
 
     /// <summary>
     /// The AIMediumPlayer is a type of AIPlayer where it will try and destroy a ship
@@ -15,15 +14,13 @@ namespace MyGame
     using System;
     using System.Collections.Generic;
 
-    public class AIMediumPlayer : AIPlayer
-    {
+    public class AIMediumPlayer : AIPlayer {
         /// <summary>
         /// Private enumarator for AI states. currently there are two states,
         /// the AI can be searching for a ship, or if it has found a ship it will
         /// target the same ship
         /// </summary>
-        private enum AIStates
-        {
+        private enum AIStates {
             Searching,
             TargetingShip
         }
@@ -31,8 +28,7 @@ namespace MyGame
         private AIStates _CurrentState = AIStates.Searching;
         private Stack<Location> _Targets = new Stack<Location>();
 
-        public AIMediumPlayer(BattleShipsGame controller) : base(controller)
-        {
+        public AIMediumPlayer (BattleShipsGame controller) : base(controller) {
         }
 
         /// <summary>
@@ -41,36 +37,30 @@ namespace MyGame
         /// needs new shooting coordinates
         /// </summary>
         /// <param name="row">the generated row</param>
-        /// <param name="column">the generated column</param>
-        protected override void GenerateCoords(ref int row, ref int column)
-        {
-            do
-            {
+        /// <param name="col">the generated column</param>
+        protected override void GenerateCoords (ref int row, ref int col) {
+            do {
                 // check which state the AI is in and uppon that choose which coordinate generation
                 // method will be used.
                 var switchExpr = _CurrentState;
-                switch (switchExpr)
-                {
-                    case AIStates.Searching:
-                        {
-                            SearchCoords(ref row, ref column);
-                            break;
-                        }
+                switch (switchExpr) {
+                    case AIStates.Searching: {
+                        SearchCoords(ref row, ref col);
+                        break;
+                    }
 
-                    case AIStates.TargetingShip:
-                        {
-                            TargetCoords(ref row, ref column);
-                            break;
-                        }
+                    case AIStates.TargetingShip: {
+                        TargetCoords(ref row, ref col);
+                        break;
+                    }
 
-                    default:
-                        {
-                            throw new ApplicationException("AI has gone in an imvalid state");
-                            //break;
-                        }
+                    default: {
+                        throw new ApplicationException("AI has gone in an imvalid state");
+                        //break;
+                    }
                 }
             }
-            while (row < 0 || column < 0 || row >= EnemyGrid.Height || column >= EnemyGrid.Width || EnemyGrid.Item != TileView.Sea);
+            while (row < 0 || col < 0 || row >= EnemyGrid.Height || col >= EnemyGrid.Width || EnemyGrid[row, col] != TileView.Sea);
 
 
             // while inside the grid and not a sea tile do the search
@@ -82,8 +72,7 @@ namespace MyGame
         /// </summary>
         /// <param name="row">row generated around the hit tile</param>
         /// <param name="column">column generated around the hit tile</param>
-        private void TargetCoords(ref int row, ref int column)
-        {
+        private void TargetCoords (ref int row, ref int column) {
             var l = _Targets.Pop();
             if (_Targets.Count == 0)
                 _CurrentState = AIStates.Searching;
@@ -96,8 +85,7 @@ namespace MyGame
         /// </summary>
         /// <param name="row">the generated row</param>
         /// <param name="column">the generated column</param>
-        private void SearchCoords(ref int row, ref int column)
-        {
+        private void SearchCoords (ref int row, ref int column) {
             row = _Random.Next(0, EnemyGrid.Height);
             column = _Random.Next(0, EnemyGrid.Width);
         }
@@ -110,18 +98,15 @@ namespace MyGame
         /// <param name="row">the row it needs to process</param>
         /// <param name="col">the column it needs to process</param>
         /// <param name="result">the result og the last shot (should be hit)</param>
-        protected override void ProcessShot(int row, int col, AttackResult result)
-        {
-            if (result.Value == ResultOfAttack.Hit)
-            {
+        protected override void ProcessShot (int row, int col, AttackResult result) {
+            if (result.Value == ResultOfAttack.Hit) {
                 _CurrentState = AIStates.TargetingShip;
                 AddTarget(row - 1, col);
                 AddTarget(row, col - 1);
                 AddTarget(row + 1, col);
                 AddTarget(row, col + 1);
             }
-            else if (result.Value == ResultOfAttack.ShotAlready)
-            {
+            else if (result.Value == ResultOfAttack.ShotAlready) {
                 throw new ApplicationException("Error in AI");
             }
         }
@@ -130,14 +115,10 @@ namespace MyGame
         /// AddTarget will add the targets it will shoot onto a stack
         /// </summary>
         /// <param name="row">the row of the targets location</param>
-        /// <param name="column">the column of the targets location</param>
-        private void AddTarget(int row, int column)
-        {
-            if (row >= 0 && column >= 0 && row < EnemyGrid.Height && column < EnemyGrid.Width && EnemyGrid.Item == TileView.Sea)
-
-
-            {
-                _Targets.Push(new Location(row, column));
+        /// <param name="col">the column of the targets location</param>
+        private void AddTarget (int row, int col) {
+            if (row >= 0 && col >= 0 && row < EnemyGrid.Height && col < EnemyGrid.Width && EnemyGrid[row, col] == TileView.Sea) {
+                _Targets.Push(new Location(row, col));
             }
         }
     }

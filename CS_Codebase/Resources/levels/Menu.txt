@@ -1,6 +1,0 @@
-
-UIElements {
-	BtnStart: 8, 3;
-	BtnEditor: 8, 6;
-	BtnSaves: 8, 9;
-}
