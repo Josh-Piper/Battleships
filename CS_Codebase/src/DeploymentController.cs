@@ -42,11 +42,11 @@ namespace MyGame {
                 GameController.AddNewState(GameState.ViewingGameMenu);
             }
 
-            if (SwinGame.KeyTyped(KeyCode.UpKey) | SwinGame.KeyTyped(KeyCode.DownKey)) {
+            if (SwinGame.KeyTyped(KeyCode.UpKey)  ||  SwinGame.KeyTyped(KeyCode.DownKey)) {
                 _currentDirection = Direction.UpDown;
             }
 
-            if (SwinGame.KeyTyped(KeyCode.LeftKey) | SwinGame.KeyTyped(KeyCode.RightKey)) {
+            if (SwinGame.KeyTyped(KeyCode.LeftKey)  ||  SwinGame.KeyTyped(KeyCode.RightKey)) {
                 _currentDirection = Direction.LeftRight;
             }
 
