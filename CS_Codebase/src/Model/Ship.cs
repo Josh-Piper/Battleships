@@ -24,10 +24,10 @@ namespace MyGame {
         /// <returns>The type of ship</returns>
         public string Name {
             get {
-                /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
                 //if (_shipName == ShipName.AircraftCarrier) {
                 //    return "Aircraft Carrier";
                 //}
+
                 return _shipName.ToString();
             }
         }

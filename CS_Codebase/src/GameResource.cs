@@ -127,23 +127,13 @@ namespace MyGame {
             width = SwinGame.ScreenWidth();
             height = SwinGame.ScreenHeight();
             SwinGame.ChangeScreenSize(800, 600);
-            ShowLoadingScreen();
             ShowMessage("Loading fonts...", 0);
             LoadFonts();
-            SwinGame.Delay(100);
             ShowMessage("Loading images...", 1);
             LoadImages();
-            SwinGame.Delay(100);
             ShowMessage("Loading sounds...", 2);
             LoadSounds();
-            SwinGame.Delay(100);
-            ShowMessage("Loading music...", 3);
             LoadMusic();
-            SwinGame.Delay(100);
-            SwinGame.Delay(100);
-            ShowMessage("Game loaded...", 5);
-            SwinGame.Delay(100);
-            EndLoadingScreen(width, height);
 
         }
 
@@ -155,7 +145,7 @@ namespace MyGame {
             SwinGame.ProcessEvents();
             _Animation = SwinGame.LoadBitmap(SwinGame.PathToResource("SwinGameAni.jpg", ResourceKind.BitmapResource));
             _LoadingFont = SwinGame.LoadFont(SwinGame.PathToResource("arial.ttf", ResourceKind.FontResource), 12);
-            _StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
+            //_StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
             _LoaderFull = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_full.png", ResourceKind.BitmapResource));
             _LoaderEmpty = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_empty.png", ResourceKind.BitmapResource));
             PlaySwinGameIntro();

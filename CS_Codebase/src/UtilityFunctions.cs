@@ -200,6 +200,8 @@ namespace MyGame {
                 }
 
                 if (!small) {
+                    //should it draw several tiny ships
+                    //putting in the wrong shipName
                     SwinGame.DrawBitmap(GameResources.GameImage(shipName), colLeft, rowTop);
                 }
                 else {
