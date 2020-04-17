@@ -280,8 +280,8 @@ namespace MyGame {
         private static void FreeSounds () {
 
             //SoundEffect obj;
-            foreach (SoundEffect obj in _Sounds.Values)
-                Audio.FreeSoundEffect(obj);
+   //         foreach (SoundEffect obj in _Sounds.Values)
+   //           Audio.FreeSoundEffect(obj);
 
         }
 
