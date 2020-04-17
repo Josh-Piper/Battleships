@@ -134,32 +134,32 @@ namespace MyGame {
                     switch (grid[row, col]) {
 
                         case TileView.Ship: {
-                                draw = false;
-                                break;
-                            }
+                            draw = false;
+                            break;
+                        }
                         /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
                         // If small Then fillColor = _SMALL_SHIP Else fillColor = _LARGE_SHIP
                         case TileView.Miss: {
-                                if (small)
-                                    fillColor = SMALL_MISS;
-                                else
-                                    fillColor = LARGE_MISS;
-                                break;
-                            }
+                            if (small)
+                                fillColor = SMALL_MISS;
+                            else
+                                fillColor = LARGE_MISS;
+                            break;
+                        }
                         case TileView.Hit: {
-                                if (small)
-                                    fillColor = SMALL_HIT;
-                                else
-                                    fillColor = LARGE_HIT;
-                                break;
-                            }
+                            if (small)
+                                fillColor = SMALL_HIT;
+                            else
+                                fillColor = LARGE_HIT;
+                            break;
+                        }
                         case TileView.Sea: {
-                                if (small)
-                                    fillColor = SMALL_SEA;
-                                else
-                                    draw = false;
-                                break;
-                            }
+                            if (small)
+                                fillColor = SMALL_SEA;
+                            else
+                                draw = false;
+                            break;
+                        }
 
                     }
 
@@ -229,33 +229,33 @@ namespace MyGame {
             var switchExpr = GameController.CurrentState;
             switch (switchExpr) {
                 case GameState.ViewingMainMenu: {
-                        break;
-                    }
+                    break;
+                }
                 case GameState.ViewingGameMenu: {
-                        break;
-                    }
+                    break;
+                }
                 case GameState.AlteringSettings: {
-                        break;
-                    }
+                    break;
+                }
                 case GameState.ViewingHighScores: {
-                        SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
-                        break;
-                    }
+                    SwinGame.DrawBitmap(GameResources.GameImage("Menu"), 0, 0);
+                    break;
+                }
                 case GameState.Discovering: {
-                        break;
-                    }
+                    break;
+                }
                 case GameState.EndingGame: {
-                        SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
-                        break;
-                    }
+                    SwinGame.DrawBitmap(GameResources.GameImage("Discovery"), 0, 0);
+                    break;
+                }
                 case GameState.Deploying: {
-                        SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
-                        break;
-                    }
+                    SwinGame.DrawBitmap(GameResources.GameImage("Deploy"), 0, 0);
+                    break;
+                }
                 default: {
-                        SwinGame.ClearScreen();
-                        break;
-                    }
+                    SwinGame.ClearScreen();
+                    break;
+                }
             }
 
             SwinGame.DrawFramerate(675, 585);

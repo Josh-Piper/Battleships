@@ -77,19 +77,19 @@ namespace MyGame {
             // create the players
             switch (_aiSetting) {
                 case AIOption.Medium: {
-                        _ai = new AIMediumPlayer(_theGame);
-                        break;
-                    }
+                    _ai = new AIMediumPlayer(_theGame);
+                    break;
+                }
 
                 case AIOption.Hard: {
-                        _ai = new AIHardPlayer(_theGame);
-                        break;
-                    }
+                    _ai = new AIHardPlayer(_theGame);
+                    break;
+                }
 
                 default: {
-                        _ai = new AIHardPlayer(_theGame);
-                        break;
-                    }
+                    _ai = new AIHardPlayer(_theGame);
+                    break;
+                }
             }
 
             _human = new Player(_theGame);
@@ -174,41 +174,41 @@ namespace MyGame {
 
             switch (result.Value) {
                 case ResultOfAttack.Destroyed: {
-                        PlayHitSequence(result.Row, result.Column, isHuman);
-                        Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
-                        break;
-                    }
+                    PlayHitSequence(result.Row, result.Column, isHuman);
+                    Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+                    break;
+                }
 
                 case ResultOfAttack.GameOver: {
-                        PlayHitSequence(result.Row, result.Column, isHuman);
-                        Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
-                        while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink"))) {
-                            SwinGame.Delay(10);
-                            SwinGame.RefreshScreen();
-                        }
-                        if (HumanPlayer.IsDestroyed) {
-                            Audio.PlaySoundEffect(GameResources.GameSound("Lose"));
-                        }
-                        else {
-                            Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
-                        }
-                        break;
+                    PlayHitSequence(result.Row, result.Column, isHuman);
+                    Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+                    while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink"))) {
+                        SwinGame.Delay(10);
+                        SwinGame.RefreshScreen();
                     }
+                    if (HumanPlayer.IsDestroyed) {
+                        Audio.PlaySoundEffect(GameResources.GameSound("Lose"));
+                    }
+                    else {
+                        Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+                    }
+                    break;
+                }
 
                 case ResultOfAttack.Hit: {
-                        PlayHitSequence(result.Row, result.Column, isHuman);
-                        break;
-                    }
+                    PlayHitSequence(result.Row, result.Column, isHuman);
+                    break;
+                }
 
                 case ResultOfAttack.Miss: {
-                        PlayMissSequence(result.Row, result.Column, isHuman);
-                        break;
-                    }
+                    PlayMissSequence(result.Row, result.Column, isHuman);
+                    break;
+                }
 
                 case ResultOfAttack.ShotAlready: {
-                        Audio.PlaySoundEffect(GameResources.GameSound("Error"));
-                        break;
-                    }
+                    Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                    break;
+                }
             }
 
         }
@@ -273,15 +273,15 @@ namespace MyGame {
             var switchExpr = result.Value;
             switch (switchExpr) {
                 case ResultOfAttack.Miss: {
-                        if (_theGame.Player == ComputerPlayer)
-                            AIAttack();
-                        break;
-                    }
+                    if (_theGame.Player == ComputerPlayer)
+                        AIAttack();
+                    break;
+                }
 
                 case ResultOfAttack.GameOver: {
-                        SwitchState(GameState.EndingGame);
-                        break;
-                    }
+                    SwitchState(GameState.EndingGame);
+                    break;
+                }
             }
 
         }
@@ -301,39 +301,39 @@ namespace MyGame {
 
             switch (CurrentState) {
                 case GameState.ViewingMainMenu: {
-                        MenuController.HandleMainMenuInput();
-                        break;
-                    }
+                    MenuController.HandleMainMenuInput();
+                    break;
+                }
 
                 case GameState.ViewingGameMenu: {
-                        MenuController.HandleGameMenuInput();
-                        break;
-                    }
+                    MenuController.HandleGameMenuInput();
+                    break;
+                }
 
                 case GameState.AlteringSettings: {
-                        MenuController.HandleSetupMenuInput();
-                        break;
-                    }
+                    MenuController.HandleSetupMenuInput();
+                    break;
+                }
 
                 case GameState.Deploying: {
-                        DeploymentController.HandleDeploymentInput();
-                        break;
-                    }
+                    DeploymentController.HandleDeploymentInput();
+                    break;
+                }
 
                 case GameState.Discovering: {
-                        DiscoveryController.HandleDiscoveryInput();
-                        break;
-                    }
+                    DiscoveryController.HandleDiscoveryInput();
+                    break;
+                }
 
                 case GameState.EndingGame: {
-                        EndingGameController.HandleEndOfGameInput();
-                        break;
-                    }
+                    EndingGameController.HandleEndOfGameInput();
+                    break;
+                }
 
                 case GameState.ViewingHighScores: {
-                        HighScoreController.HandleHighScoreInput();
-                        break;
-                    }
+                    HighScoreController.HandleHighScoreInput();
+                    break;
+                }
             }
 
             UtilityFunctions.UpdateAnimations();
@@ -352,39 +352,39 @@ namespace MyGame {
 
             switch (CurrentState) {
                 case GameState.ViewingMainMenu: {
-                        MenuController.DrawMainMenu();
-                        break;
-                    }
+                    MenuController.DrawMainMenu();
+                    break;
+                }
 
                 case GameState.ViewingGameMenu: {
-                        MenuController.DrawGameMenu();
-                        break;
-                    }
+                    MenuController.DrawGameMenu();
+                    break;
+                }
 
                 case GameState.AlteringSettings: {
-                        MenuController.DrawSettings();
-                        break;
-                    }
+                    MenuController.DrawSettings();
+                    break;
+                }
 
                 case GameState.Deploying: {
-                        DeploymentController.DrawDeployment();
-                        break;
-                    }
+                    DeploymentController.DrawDeployment();
+                    break;
+                }
 
                 case GameState.Discovering: {
-                        DiscoveryController.DrawDiscovery();
-                        break;
-                    }
+                    DiscoveryController.DrawDiscovery();
+                    break;
+                }
 
                 case GameState.EndingGame: {
-                        EndingGameController.DrawEndOfGame();
-                        break;
-                    }
+                    EndingGameController.DrawEndOfGame();
+                    break;
+                }
 
                 case GameState.ViewingHighScores: {
-                        HighScoreController.DrawHighScores();
-                        break;
-                    }
+                    HighScoreController.DrawHighScores();
+                    break;
+                }
             }
 
             UtilityFunctions.DrawAnimations();
