@@ -7,7 +7,7 @@ namespace MyGame {
     /// <remarks></remarks>
     public enum ShipName {
 
-        None, 
+        None,
         Tug,
         Submarine,
         Destroyer,
