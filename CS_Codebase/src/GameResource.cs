@@ -148,11 +148,11 @@ namespace MyGame {
             //_StartSound = Audio.LoadSoundEffect(SwinGame.PathToResource("SwinGameStart.ogg", ResourceKind.SoundResource));
             _LoaderFull = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_full.png", ResourceKind.BitmapResource));
             _LoaderEmpty = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_empty.png", ResourceKind.BitmapResource));
-            PlaySwinGameIntro();
+            //PlaySwinGameIntro();
 
         }
 
-        private static void PlaySwinGameIntro () {
+      /*  private static void PlaySwinGameIntro () {
 
             const int ANI_CELL_COUNT = 11;
             //Audio.PlaySoundEffect(_StartSound);
@@ -167,7 +167,7 @@ namespace MyGame {
 
             SwinGame.Delay(1500);
 
-        }
+        } */
 
         private static void ShowMessage (string message, int number) {
 
