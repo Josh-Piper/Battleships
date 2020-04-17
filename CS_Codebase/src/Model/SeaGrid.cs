@@ -88,7 +88,7 @@ namespace MyGame {
         /// SeaGrid constructor, a seagrid has a number of tiles stored in an array
         /// </summary>
         public SeaGrid( Dictionary<ShipName, Ship> ships ) {
-
+            _GameTiles = new Tile[Width, Height];
             // fill array with empty Tiles
             for (int i = 0; i < Width; i++) {
                 for (int j = 0; j < Height; j++) {
