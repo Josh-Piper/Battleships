@@ -2,7 +2,7 @@
 using SwinGameSDK;
 
 
-namespace MyGame {
+namespace Battleships {
 
     public class EndingGameController {
 
@@ -22,7 +22,7 @@ namespace MyGame {
             UtilityFunctions.DrawSmallField(GameController.HumanPlayer.PlayerGrid, GameController.HumanPlayer);
 
             string message = (GameController.HumanPlayer.IsDestroyed) ? "You Lose!" : "-- You Win --";
-            SwinGame.DrawText(message, Color.White, Color.Transparent, GameResources.GameFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
+            SwinGame.DrawText(message, Color.White, Color.Transparent, GameResources.GetFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
 
         }
 

@@ -2,7 +2,7 @@
 using SwinGameSDK;
 
 
-namespace MyGame {
+namespace Battleships {
 
     public class GameMain {
 
@@ -13,7 +13,7 @@ namespace MyGame {
 
             // Load Resources
             GameResources.LoadResources();
-           // SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+            SwinGame.PlayMusic(GameResources.GameMusic("Background"));
 
             // Game Loop
             while (!(SwinGame.WindowCloseRequested() == true | GameController.CurrentState == GameState.Quitting)) {

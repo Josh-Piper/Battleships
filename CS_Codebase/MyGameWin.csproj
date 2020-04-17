@@ -34,7 +34,7 @@
     <OutputType>WinExe</OutputType>
   </PropertyGroup>
   <PropertyGroup>
-    <StartupObject>MyGame.GameMain</StartupObject>
+    <StartupObject>Battleships.GameMain</StartupObject>
   </PropertyGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

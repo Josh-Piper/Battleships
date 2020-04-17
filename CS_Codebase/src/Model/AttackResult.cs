@@ -1,5 +1,5 @@
 ﻿
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// AttackResult gives the result after a shot has been made.

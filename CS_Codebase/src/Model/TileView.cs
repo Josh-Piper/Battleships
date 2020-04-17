@@ -1,5 +1,5 @@
 ﻿
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The values that are visable for a given tile.

@@ -1,5 +1,5 @@
 ﻿
-namespace MyGame {
+namespace Battleships {
 
     public enum GameState {
 

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// AIHardPlayer is a type of player. This AI will know directions of ships

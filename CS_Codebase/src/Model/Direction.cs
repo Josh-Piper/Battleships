@@ -1,5 +1,5 @@
 ﻿
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The direction the ship can be oriented.

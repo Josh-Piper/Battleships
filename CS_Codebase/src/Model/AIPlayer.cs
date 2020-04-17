@@ -2,7 +2,7 @@
 using SwinGameSDK;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The AIPlayer is a type of player. It can readomly deploy ships, it also has the

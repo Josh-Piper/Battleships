@@ -2,7 +2,7 @@
 using SwinGameSDK;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The menu structure for the game.
@@ -171,12 +171,10 @@ namespace MyGame {
         /// </remarks>
         private static void DrawButtons (int menu, int level, int xOffset) {
 
-            int btnTop;
-            var toDraw = default(Rectangle);
-            btnTop = MENU_TOP - (MENU_GAP + BUTTON_HEIGHT) * level;
-            int i;
-            var loopTo = _menuStructure[menu].Length - 1;
-            for (i = 0; i <= loopTo; i++) {
+            Rectangle toDraw = default(Rectangle);
+            int btnTop = MENU_TOP - (MENU_GAP + BUTTON_HEIGHT) * level;
+
+            for (int i = 0; i < _menuStructure[menu].Length; i++) {
                 int btnLeft;
                 btnLeft = MENU_LEFT + BUTTON_SEP * (i + xOffset);
                 /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
@@ -185,7 +183,7 @@ namespace MyGame {
                 toDraw.Y = btnTop + TEXT_OFFSET;
                 toDraw.Width = BUTTON_WIDTH;
                 toDraw.Height = BUTTON_HEIGHT;
-                SwinGame.DrawText(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GameFont("Menu"), FontAlignment.AlignCenter, toDraw);
+                SwinGame.DrawText(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GetFont("Menu"), FontAlignment.AlignCenter, toDraw);
                 /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
                 //SwinGame.DrawTextLines(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GameFont("Menu"), FontAlignment.AlignCenter, toDraw);
                 if (SwinGame.MouseDown(MouseButton.LeftButton) & IsMouseOverMenu(i, level, xOffset)) {

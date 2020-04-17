@@ -2,7 +2,7 @@
 using System;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The SeaGridAdapter allows for the change in a sea grid view. Whenever a ship is

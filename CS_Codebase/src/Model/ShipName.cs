@@ -1,5 +1,5 @@
 ﻿
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The names of all of the ships in the gam

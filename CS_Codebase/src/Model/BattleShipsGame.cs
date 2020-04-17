@@ -2,7 +2,7 @@
 using System;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The BattleShipsGame controls a big part of the game. It will add the two players

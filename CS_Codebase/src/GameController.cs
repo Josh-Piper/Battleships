@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using SwinGameSDK;
 
 
-namespace MyGame {
+namespace Battleships {
 
     public class GameController {
 
@@ -137,7 +137,7 @@ namespace MyGame {
                 UtilityFunctions.AddExplosion(row, column);
             }
 
-            Audio.PlaySoundEffect(GameResources.GameSound("Hit"));
+            Audio.PlaySoundEffect(GameResources.GetSound("Hit"));
             UtilityFunctions.DrawAnimationSequence();
 
         }
@@ -148,7 +148,7 @@ namespace MyGame {
                 UtilityFunctions.AddSplash(row, column);
             }
 
-            Audio.PlaySoundEffect(GameResources.GameSound("Miss"));
+            Audio.PlaySoundEffect(GameResources.GetSound("Miss"));
             UtilityFunctions.DrawAnimationSequence();
 
         }
@@ -175,22 +175,22 @@ namespace MyGame {
             switch (result.Value) {
                 case ResultOfAttack.Destroyed: {
                     PlayHitSequence(result.Row, result.Column, isHuman);
-                    Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
+                    Audio.PlaySoundEffect(GameResources.GetSound("Sink"));
                     break;
                 }
 
                 case ResultOfAttack.GameOver: {
                     PlayHitSequence(result.Row, result.Column, isHuman);
-                    Audio.PlaySoundEffect(GameResources.GameSound("Sink"));
-                    while (Audio.SoundEffectPlaying(GameResources.GameSound("Sink"))) {
+                    Audio.PlaySoundEffect(GameResources.GetSound("Sink"));
+                    while (Audio.SoundEffectPlaying(GameResources.GetSound("Sink"))) {
                         SwinGame.Delay(10);
                         SwinGame.RefreshScreen();
                     }
                     if (HumanPlayer.IsDestroyed) {
-                        Audio.PlaySoundEffect(GameResources.GameSound("Lose"));
+                        Audio.PlaySoundEffect(GameResources.GetSound("Lose"));
                     }
                     else {
-                        Audio.PlaySoundEffect(GameResources.GameSound("Winner"));
+                        Audio.PlaySoundEffect(GameResources.GetSound("Winner"));
                     }
                     break;
                 }
@@ -206,7 +206,7 @@ namespace MyGame {
                 }
 
                 case ResultOfAttack.ShotAlready: {
-                    Audio.PlaySoundEffect(GameResources.GameSound("Error"));
+                    Audio.PlaySoundEffect(GameResources.GetSound("Error"));
                     break;
                 }
             }
@@ -270,14 +270,12 @@ namespace MyGame {
         /// to the AI player.</remarks>
         private static void CheckAttackResult (AttackResult result) {
 
-            var switchExpr = result.Value;
-            switch (switchExpr) {
+            switch (result.Value) {
                 case ResultOfAttack.Miss: {
                     if (_theGame.Player == ComputerPlayer)
                         AIAttack();
                     break;
                 }
-
                 case ResultOfAttack.GameOver: {
                     SwitchState(GameState.EndingGame);
                     break;

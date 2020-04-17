@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// The AIMediumPlayer is a type of AIPlayer where it will try and destroy a ship

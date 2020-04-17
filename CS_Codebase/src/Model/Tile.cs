@@ -2,7 +2,7 @@
 using System;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// Tile knows its location on the grid, if it is a ship and if it has been

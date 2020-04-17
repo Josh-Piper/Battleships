@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 
 //Dictionary fixes need to be applied to get key of name and add ship
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// Player has its own _PlayerGrid, and can see an _EnemyGrid, it can also check if

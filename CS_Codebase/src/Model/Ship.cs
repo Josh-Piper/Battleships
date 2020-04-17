@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 
 
-namespace MyGame {
+namespace Battleships {
 
     /// <summary>
     /// A Ship has all the details about itself. For example the shipname,
