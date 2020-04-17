@@ -127,23 +127,13 @@ namespace MyGame {
             width = SwinGame.ScreenWidth();
             height = SwinGame.ScreenHeight();
             SwinGame.ChangeScreenSize(800, 600);
-            ShowLoadingScreen();
             ShowMessage("Loading fonts...", 0);
             LoadFonts();
-            SwinGame.Delay(100);
             ShowMessage("Loading images...", 1);
             LoadImages();
-            SwinGame.Delay(100);
             ShowMessage("Loading sounds...", 2);
             LoadSounds();
-            SwinGame.Delay(100);
-            ShowMessage("Loading music...", 3);
             LoadMusic();
-            SwinGame.Delay(100);
-            SwinGame.Delay(100);
-            ShowMessage("Game loaded...", 5);
-            SwinGame.Delay(100);
-            EndLoadingScreen(width, height);
 
         }
 
