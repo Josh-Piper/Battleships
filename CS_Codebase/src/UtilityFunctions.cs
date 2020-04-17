@@ -185,7 +185,7 @@ namespace MyGame {
             foreach (Ship s in thePlayer) {
                 if (s is null || !s.IsDeployed)
                     continue;
-                rowTop = /*top + */(cellGap + cellHeight) * s.Row + SHIP_GAP;
+                rowTop = top + (cellGap + cellHeight) * s.Row + SHIP_GAP;
                 colLeft = left + (cellGap + cellWidth) * s.Column + SHIP_GAP;
                 if (s.Direction == Direction.LeftRight) {
                     shipName = "ShipLR" + s.Size;
@@ -200,6 +200,8 @@ namespace MyGame {
                 }
 
                 if (!small) {
+                    //should it draw several tiny ships
+                    //putting in the wrong shipName
                     SwinGame.DrawBitmap(GameResources.GameImage(shipName), colLeft, rowTop);
                 }
                 else {
