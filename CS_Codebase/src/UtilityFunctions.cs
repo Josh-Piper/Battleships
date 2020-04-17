@@ -115,7 +115,7 @@ namespace MyGame {
         private static void DrawCustomField (ISeaGrid grid, Player thePlayer, bool small, bool showShips, int left, int top, int width, int height, int cellWidth, int cellHeight, int cellGap) {
 
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-            // SwinGame.FillRectangle(Color.Blue, left, top, width, height)
+            //SwinGame.FillRectangle(Color.Blue, left, top, width, height);
 
             int rowTop;
             int colLeft;
@@ -185,7 +185,7 @@ namespace MyGame {
             foreach (Ship s in thePlayer) {
                 if (s is null || !s.IsDeployed)
                     continue;
-                rowTop = /*top + */(cellGap + cellHeight) * s.Row + SHIP_GAP;
+                rowTop = top + (cellGap + cellHeight) * s.Row + SHIP_GAP;
                 colLeft = left + (cellGap + cellWidth) * s.Column + SHIP_GAP;
                 if (s.Direction == Direction.LeftRight) {
                     shipName = "ShipLR" + s.Size;

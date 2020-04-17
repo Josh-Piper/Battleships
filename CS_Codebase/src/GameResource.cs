@@ -165,7 +165,7 @@ namespace MyGame {
         private static void PlaySwinGameIntro () {
 
             const int ANI_CELL_COUNT = 11;
-            Audio.PlaySoundEffect(_StartSound);
+            //Audio.PlaySoundEffect(_StartSound);
             SwinGame.Delay(200);
             int i;
             for (i = 0; i <= ANI_CELL_COUNT - 1; i++) {

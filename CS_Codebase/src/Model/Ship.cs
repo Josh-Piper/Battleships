@@ -24,10 +24,10 @@ namespace MyGame {
         /// <returns>The type of ship</returns>
         public string Name {
             get {
-                if (_shipName == ShipName.AircraftCarrier) {
-                    return "Aircraft Carrier";
-                }
-
+                /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
+                //if (_shipName == ShipName.AircraftCarrier) {
+                //    return "Aircraft Carrier";
+                //}
                 return _shipName.ToString();
             }
         }
@@ -79,10 +79,9 @@ namespace MyGame {
 
             _shipName = ship;
             _tiles = new List<Tile>();
-            /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-            /// - Get size of ship
-            // gets the ship size from the enumarator
-            Size = 1;
+
+            // Get the ship size from the enumarator
+            Size = (int)ship;
 
         }
 
