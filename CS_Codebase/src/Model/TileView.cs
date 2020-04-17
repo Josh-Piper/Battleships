@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
+﻿
+namespace MyGame {
 
-namespace MyGame
-{
     /// <summary>
     /// The values that are visable for a given tile.
     /// </summary>
+    public enum TileView {
 
-    public enum TileView
-    {
         /// <summary>
         /// The viewer can see sea
         /// </summary>
@@ -37,5 +30,7 @@ namespace MyGame
         /// something was hit
         /// </summary>
         Hit
+
     }
+
 }

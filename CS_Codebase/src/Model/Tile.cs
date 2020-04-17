@@ -1,96 +1,85 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
+﻿
+using System;
 
 
-namespace MyGame
-{
+namespace MyGame {
+
     /// <summary>
     /// Tile knows its location on the grid, if it is a ship and if it has been
     /// shot before
     /// </summary>
-    using System;
+    public class Tile {
 
-    public class Tile
-    {
-        private readonly int _RowValue;        // the row value of the tile
-        private readonly int _ColumnValue;     // the column value of the tile
         private Ship _Ship = default;     // the ship the tile belongs to
-        private bool _Shot = false;    // the tile has been shot at
 
         /// <summary>
         /// Has the tile been shot?
         /// </summary>
         /// <value>indicate if the tile has been shot</value>
         /// <returns>true if the tile was shot</returns>
-        public bool Shot
-        {
-            get
-            {
-                return _Shot;
-            }
-
-            set
-            {
-                _Shot = value;
-            }
-        }
+        public bool Shot { get; set; } = false;
 
         /// <summary>
         /// The row of the tile in the grid
         /// </summary>
         /// <value>the row index of the tile in the grid</value>
         /// <returns>the row index of the tile</returns>
-        public int Row
-        {
-            get
-            {
-                return _RowValue;
-            }
-        }
+        public int Row { get; }
 
         /// <summary>
         /// The column of the tile in the grid
         /// </summary>
         /// <value>the column of the tile in the grid</value>
         /// <returns>the column of the tile in the grid</returns>
-        public int Column
-        {
-            get
-            {
-                return _ColumnValue;
-            }
-        }
+        public int Column { get; }
 
         /// <summary>
         /// Ship allows for a tile to check if there is ship and add a ship to a tile
         /// </summary>
-        public Ship Ship
-        {
-            get
-            {
+        public Ship Ship {
+            get {
                 return _Ship;
             }
-
-            set
-            {
-                if (_Ship is null)
-                {
+            set {
+                if (_Ship is null) {
                     _Ship = value;
-                    if (value is object)
-                    {
+                    if (value is object) {
                         _Ship.AddTile(this);
                     }
                 }
-                else
-                {
+                else {
                     throw new InvalidOperationException("There is already a ship at [" + Row + ", " + Column + "]");
                 }
             }
         }
+
+        /// <summary>
+        /// View is able to tell the grid what the tile is
+        /// </summary>
+        public TileView View {
+            get {
+                // if there is no ship in the tile
+                if (_Ship is null) {
+                    // and the tile has been hit
+                    if (Shot) {
+                        return TileView.Miss;
+                    }
+                    else {
+                        // and the tile hasn't been hit
+                        return TileView.Sea;
+                    }
+                }
+                // if there is a ship and it has been hit
+                else if (Shot) {
+                    return TileView.Hit;
+                }
+                else {
+                    // if there is a ship and it hasn't been hit
+                    return TileView.Ship;
+                }
+            }
+        }
+
 
         /// <summary>
         /// The tile constructor will know where it is on the grid, and is its a ship
@@ -98,73 +87,41 @@ namespace MyGame
         /// <param name="row">the row on the grid</param>
         /// <param name="col">the col on the grid</param>
         /// <param name="ship">what ship it is</param>
-        public Tile(int row, int col, Ship ship)
-        {
-            _RowValue = row;
-            _ColumnValue = col;
+        public Tile (int row, int col, Ship ship) {
+
+            Row = row;
+            Column = col;
             _Ship = ship;
+
         }
 
         /// <summary>
         /// Clearship will remove the ship from the tile
         /// </summary>
-        public void ClearShip()
-        {
-            _Ship = null;
-        }
+        public void ClearShip () {
 
-        /// <summary>
-        /// View is able to tell the grid what the tile is
-        /// </summary>
-        public TileView View
-        {
-            get
-            {
-                // if there is no ship in the tile
-                if (_Ship is null)
-                {
-                    // and the tile has been hit
-                    if (_Shot)
-                    {
-                        return TileView.Miss;
-                    }
-                    else
-                    {
-                        // and the tile hasn't been hit
-                        return TileView.Sea;
-                    }
-                }
-                // if there is a ship and it has been hit
-                else if (_Shot)
-                {
-                    return TileView.Hit;
-                }
-                else
-                {
-                    // if there is a ship and it hasn't been hit
-                    return TileView.Ship;
-                }
-            }
+            _Ship = null;
+
         }
 
         /// <summary>
         /// Shoot allows a tile to be shot at, and if the tile has been hit before
         /// it will give an error
         /// </summary>
-        internal void Shoot()
-        {
-            if (false == Shot)
-            {
+        internal void Shoot () {
+
+            if (Shot == false) {
                 Shot = true;
-                if (_Ship is object)
-                {
+                if (_Ship is object) {
                     _Ship.Hit();
                 }
             }
-            else
-            {
+            else {
                 throw new ApplicationException("You have already shot this square");
             }
+
         }
+
     }
+
 }

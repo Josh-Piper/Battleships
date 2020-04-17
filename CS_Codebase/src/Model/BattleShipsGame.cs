@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
+﻿
+using System;
 
-namespace MyGame
-{
+
+namespace MyGame {
+
     /// <summary>
     /// The BattleShipsGame controls a big part of the game. It will add the two players
     /// to the game and make sure that both players ships are all deployed before starting the game.
     /// It also allows players to shoot and swap turns between player. It will also check if players
     /// are destroyed.
     /// </summary>
-    using System;
-
-    public class BattleShipsGame
-    {
+    public class BattleShipsGame {
 
         /// <summary>
         /// The attack delegate type is used to send notifications of the end of an
@@ -24,7 +18,7 @@ namespace MyGame
         /// </summary>
         /// <param name="sender">the game sending the notification</param>
         /// <param name="result">the result of the attack</param>
-        public delegate void AttackCompletedHandler(object sender, AttackResult result);
+        public delegate void AttackCompletedHandler (object sender, AttackResult result);
 
         /// <summary>
         /// The AttackCompleted event is raised when an attack has completed.
@@ -34,7 +28,7 @@ namespace MyGame
         /// </remarks>
         public event AttackCompletedHandler AttackCompleted;
 
-        private Player[] _players = new Player[3];
+        private readonly Player[] _players = new Player[3];
         private int _playerIndex = 0;
 
         /// <summary>
@@ -43,10 +37,8 @@ namespace MyGame
         /// <value>The current player</value>
         /// <returns>The current player</returns>
         /// <remarks>This value will switch between the two players as they have their attacks</remarks>
-        public Player Player
-        {
-            get
-            {
+        public Player Player {
+            get {
                 return _players[_playerIndex];
             }
         }
@@ -56,31 +48,30 @@ namespace MyGame
         /// that the AI player deploys all ships
         /// </summary>
         /// <param name="p"></param>
-        public void AddDeployedPlayer(Player p)
-        {
-            if (_players[0] is null)
-            {
+        public void AddDeployedPlayer (Player p) {
+
+            if (_players[0] is null) {
                 _players[0] = p;
             }
-            else if (_players[1] is null)
-            {
+            else if (_players[1] is null) {
                 _players[1] = p;
                 CompleteDeployment();
             }
-            else
-            {
+            else {
                 throw new ApplicationException("You cannot add another player, the game already has two players.");
             }
+
         }
 
         /// <summary>
         /// Assigns each player the other's grid as the enemy grid. This allows each player
         /// to examine the details visable on the other's sea grid.
         /// </summary>
-        private void CompleteDeployment()
-        {
+        private void CompleteDeployment () {
+
             _players[0].Enemy = new SeaGridAdapter(_players[1].PlayerGrid);
             _players[1].Enemy = new SeaGridAdapter(_players[0].PlayerGrid);
+
         }
 
         /// <summary>
@@ -90,27 +81,27 @@ namespace MyGame
         /// <param name="row">the row fired upon</param>
         /// <param name="col">the column fired upon</param>
         /// <returns>The result of the attack</returns>
-        public AttackResult Shoot(int row, int col)
-        {
+        public AttackResult Shoot (int row, int col) {
+
             AttackResult newAttack;
             int otherPlayer = (_playerIndex + 1) % 2;
             newAttack = Player.Shoot(row, col);
 
             // Will exit the game when all players ships are destroyed
-            if (_players[otherPlayer].IsDestroyed)
-            {
+            if (_players[otherPlayer].IsDestroyed) {
                 newAttack = new AttackResult(ResultOfAttack.GameOver, newAttack.Ship, newAttack.Text, row, col);
             }
 
             AttackCompleted?.Invoke(this, newAttack);
 
             // change player if the last hit was a miss
-            if (newAttack.Value == ResultOfAttack.Miss)
-            {
+            if (newAttack.Value == ResultOfAttack.Miss) {
                 _playerIndex = otherPlayer;
             }
 
             return newAttack;
         }
+
     }
+
 }

@@ -10,26 +10,42 @@ namespace MyGame {
     /// </summary>
     public class SeaGridAdapter : ISeaGrid {
 
-        private SeaGrid _MyGrid;
+        private readonly SeaGrid _MyGrid;
+
+        /// <summary>
+        /// Indicates that the grid has been changed
+        /// </summary>
+        public event EventHandler Changed;
+
+        /// <summary>
+        /// Get the width of a tile
+        /// </summary>
+        public int Width {
+            get => _MyGrid.Width;
+        }
+
+        /// <summary>
+        /// Get the height of the tile
+        /// </summary>
+        public int Height {
+            get => _MyGrid.Height;
+        }
+
+        /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
+        public TileView this[int row, int col] {
+            get => _MyGrid[row, col];
+        }
+
 
         /// <summary>
         /// Create the SeaGridAdapter, with the grid, and it will allow it to be changed
         /// </summary>
         /// <param name="grid">the grid that needs to be adapted</param>
-        public SeaGridAdapter(SeaGrid grid) {
+        public SeaGridAdapter (SeaGrid grid) {
 
             _MyGrid = grid;
             _MyGrid.Changed += new EventHandler(MyGrid_Changed);
 
-        }
-
-        /// <summary>
-        /// MyGrid_Changed causes the grid to be redrawn by raising a changed event
-        /// </summary>
-        /// <param name="sender">the object that caused the change</param>
-        /// <param name="e">what needs to be redrawn</param>
-        private void MyGrid_Changed(object sender, EventArgs e) {
-            Changed?.Invoke(this, e);
         }
 
         /* TODO ERROR: Skipped RegionDirectiveTrivia */
@@ -51,31 +67,13 @@ namespace MyGame {
         //}
 
         /// <summary>
-        /// Indicates that the grid has been changed
+        /// MyGrid_Changed causes the grid to be redrawn by raising a changed event
         /// </summary>
-        public event EventHandler Changed;
+        /// <param name="sender">the object that caused the change</param>
+        /// <param name="e">what needs to be redrawn</param>
+        private void MyGrid_Changed (object sender, EventArgs e) {
 
-        /// <summary>
-        /// Get the width of a tile
-        /// </summary>
-        public int Width {
-            get {
-                return _MyGrid.Width;
-            }
-        }
-
-        /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-        public TileView this[int row, int col] {
-            get => _MyGrid[row, col];
-        }
-
-        /// <summary>
-        /// Get the height of the tile
-        /// </summary>
-        public int Height {
-            get {
-                return _MyGrid.Height;
-            }
+            Changed?.Invoke(this, e);
         }
 
         /// <summary>
@@ -84,9 +82,13 @@ namespace MyGame {
         /// <param name="row">the row its hitting at</param>
         /// <param name="col">the column its hitting at</param>
         /// <returns>The result from hitting that tile</returns>
-        public AttackResult HitTile(int row, int col) {
+        public AttackResult HitTile (int row, int col) {
+
             return _MyGrid.HitTile(row, col);
+
         }
         /* TODO ERROR: Skipped EndRegionDirectiveTrivia */
+
     }
+
 }

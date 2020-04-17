@@ -1,19 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
+﻿
+namespace MyGame {
 
-
-namespace MyGame
-{
     /// <summary>
     /// The result of an attack.
     /// </summary>
+    public enum ResultOfAttack {
 
-    public enum ResultOfAttack
-    {
         /// <summary>
         /// The player hit something
         /// </summary>
@@ -38,5 +30,7 @@ namespace MyGame
         /// The player killed all of the opponents ships
         /// </summary>
         GameOver
+
     }
+
 }

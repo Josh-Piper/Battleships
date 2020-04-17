@@ -1,12 +1,9 @@
-﻿using System;
+﻿
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using SwinGameSDK;
-using static SwinGameSDK.SwinGame;
 
 
 namespace MyGame {
+
     /// <summary>
     /// A Ship has all the details about itself. For example the shipname,
     /// size, number of hits taken and the location. Its able to add tiles,
@@ -15,16 +12,10 @@ namespace MyGame {
     /// <remarks>
     /// Deployment information is supplied to allow ships to be drawn.
     /// </remarks>
-
-
     public class Ship {
-        private ShipName _shipName;
-        private int _sizeOfShip;
-        private int _hitsTaken = 0;
-        private List<Tile> _tiles;
-        private int _row;
-        private int _col;
-        private Direction _direction;
+
+        private readonly ShipName _shipName;
+        private readonly List<Tile> _tiles;
 
         /// <summary>
         /// The type of ship
@@ -46,11 +37,7 @@ namespace MyGame {
         /// </summary>
         /// <value>The number of hits the ship can take</value>
         /// <returns>The number of hits the ship can take</returns>
-        public int Size {
-            get {
-                return _sizeOfShip;
-            }
-        }
+        public int Size { get; }
 
         /// <summary>
         /// The number of hits that the ship has taken.
@@ -58,43 +45,45 @@ namespace MyGame {
         /// <value>The number of hits the ship has taken.</value>
         /// <returns>The number of hits the ship has taken</returns>
         /// <remarks>When this equals Size the ship is sunk</remarks>
-        public int Hits {
-            get {
-                return _hitsTaken;
-            }
-        }
+        public int Hits { get; private set; } = 0;
 
         /// <summary>
         /// The row location of the ship
         /// </summary>
         /// <value>The topmost location of the ship</value>
         /// <returns>the row of the ship</returns>
-        public int Row {
+        public int Row { get; private set; }
+
+        public int Column { get; private set; }
+
+        public Direction Direction { get; private set; }
+
+        /// <summary>
+        /// IsDeployed returns if the ships is deployed, if its deplyed it has more than
+        /// 0 tiles
+        /// </summary>
+        public bool IsDeployed {
             get {
-                return _row;
+                return _tiles.Count > 0;
             }
         }
 
-        public int Column {
+        public bool IsDestroyed {
             get {
-                return _col;
+                return Hits == Size;
             }
         }
 
-        public Direction Direction {
-            get {
-                return _direction;
-            }
-        }
 
         public Ship (ShipName ship) {
+
             _shipName = ship;
             _tiles = new List<Tile>();
-
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             /// - Get size of ship
             // gets the ship size from the enumarator
-            _sizeOfShip = 1;
+            Size = 1;
+
         }
 
         /// <summary>
@@ -115,23 +104,7 @@ namespace MyGame {
         }
 
         public void Hit () {
-            _hitsTaken = _hitsTaken + 1;
-        }
-
-        /// <summary>
-        /// IsDeployed returns if the ships is deployed, if its deplyed it has more than
-        /// 0 tiles
-        /// </summary>
-        public bool IsDeployed {
-            get {
-                return _tiles.Count > 0;
-            }
-        }
-
-        public bool IsDestroyed {
-            get {
-                return Hits == Size;
-            }
+            Hits = Hits + 1;
         }
 
         /// <summary>
@@ -141,9 +114,13 @@ namespace MyGame {
         /// <param name="row"></param>
         /// <param name="col"></param>
         internal void Deployed (Direction direction, int row, int col) {
-            _row = row;
-            _col = col;
-            _direction = direction;
+
+            Row = row;
+            Column = col;
+            Direction = direction;
+
         }
+
     }
+
 }

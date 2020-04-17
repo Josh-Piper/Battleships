@@ -5,6 +5,7 @@ namespace MyGame {
     /// The different AI levels.
     /// </summary>
     public enum AIOption {
+
         /// <summary>
         /// Easy, total random shooting
         /// </summary>
@@ -19,5 +20,7 @@ namespace MyGame {
         /// As medium, but removes shots once it misses
         /// </summary>
         Hard
+
     }
+
 }
