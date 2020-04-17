@@ -121,11 +121,11 @@ namespace MyGame {
             int colLeft;
 
             // Draw the grid
-            for (int row = 0; row <= 9; row++) {
+            for (int row = 0; row < 10; row++) {
 
                 rowTop = top + (cellGap + cellHeight) * row;
 
-                for (int col = 0; col <= 9; col++) {
+                for (int col = 0; col < 10; col++) {
 
                     colLeft = left + (cellGap + cellWidth) * col;
                     Color fillColor = default;

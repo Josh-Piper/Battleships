@@ -86,24 +86,30 @@ namespace MyGame {
         }
 
         /// <summary>
-        /// Add tile adds the ship tile
+        /// Adds the ship to a tile
         /// </summary>
         /// <param name="tile">one of the tiles the ship is on</param>
         public void AddTile (Tile tile) {
+
             _tiles.Add(tile);
+
         }
 
         /// <summary>
         /// Remove clears the tile back to a sea tile
         /// </summary>
         public void Remove () {
+
             foreach (Tile tile in _tiles)
                 tile.ClearShip();
             _tiles.Clear();
+
         }
 
         public void Hit () {
-            Hits = Hits + 1;
+
+            Hits++;
+
         }
 
         /// <summary>

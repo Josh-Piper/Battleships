@@ -55,8 +55,9 @@ namespace MyGame {
             }
 
             if (SwinGame.MouseClicked(MouseButton.LeftButton)) {
-                ShipName selected;
-                selected = GetShipMouseIsOver();
+
+                ShipName selected = GetShipMouseIsOver();
+
                 if (selected != ShipName.None) {
                     _selectedShip = selected;
                 }
@@ -76,6 +77,7 @@ namespace MyGame {
                 else if (UtilityFunctions.IsMouseInRectangle(RANDOM_BUTTON_LEFT, TOP_BUTTONS_TOP, RANDOM_BUTTON_WIDTH, TOP_BUTTONS_HEIGHT)) {
                     GameController.HumanPlayer.RandomizeDeployment();
                 }
+
             }
 
         }
@@ -90,13 +92,12 @@ namespace MyGame {
         /// </remarks>
         private static void DoDeployClick () {
 
-            Point2D mouse;
-            mouse = SwinGame.MousePosition();
+            Point2D mouse = SwinGame.MousePosition();
 
             // Calculate the row/col clicked
-            int row, col;
-            row = Convert.ToInt32(Math.Floor(mouse.Y / (UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
-            col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
+            int row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
+            int col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
+
             if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height) {
                 if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width) {
                     // if in the area try to deploy
