@@ -6,13 +6,15 @@ using SwinGameSDK;
 
 namespace Battleships {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class GameController {
 
-        private static BattleShipsGame _theGame;
-        private static Player _human;
-        private static AIPlayer _ai;
-        private static Stack<GameState> _state = new Stack<GameState>();
-        private static AIOption _aiSetting;
+        private static BattleShipsGame myGame;
+        private static AIPlayer ai;
+        private static readonly Stack<GameState> currentState = new Stack<GameState>();
+        private static AIOption aiSettings;
 
 
         /// <summary>
@@ -23,7 +25,7 @@ namespace Battleships {
         /// <returns>The current state</returns>
         public static GameState CurrentState {
             get {
-                return _state.Peek();
+                return currentState.Peek();
             }
         }
 
@@ -32,11 +34,7 @@ namespace Battleships {
         /// </summary>
         /// <value>the human player</value>
         /// <returns>the human player</returns>
-        public static Player HumanPlayer {
-            get {
-                return _human;
-            }
-        }
+        public static Player HumanPlayer { get; private set; }
 
         /// <summary>
         /// Returns the computer player.
@@ -45,18 +43,18 @@ namespace Battleships {
         /// <returns>the conputer player</returns>
         public static Player ComputerPlayer {
             get {
-                return _ai;
+                return ai;
             }
         }
 
-        // -- Contructor -- //
+
         static GameController () {
 
             // bottom state will be quitting. If player exits main menu then the game is over
-            _state.Push(GameState.Quitting);
+            currentState.Push(GameState.Quitting);
 
             // at the start the player is viewing the main menu
-            _state.Push(GameState.ViewingMainMenu);
+            currentState.Push(GameState.ViewingMainMenu);
 
         }
 
@@ -68,38 +66,38 @@ namespace Battleships {
         /// </remarks>
         public static void StartGame () {
 
-            if (_theGame is object)
+            if (myGame is object)
                 EndGame();
 
             // Create the game
-            _theGame = new BattleShipsGame();
+            myGame = new BattleShipsGame();
 
             // create the players
-            switch (_aiSetting) {
+            switch (aiSettings) {
                 case AIOption.Medium: {
-                    _ai = new AIMediumPlayer(_theGame);
+                    ai = new AIMediumPlayer(myGame);
                     break;
                 }
 
                 case AIOption.Hard: {
-                    _ai = new AIHardPlayer(_theGame);
+                    ai = new AIHardPlayer(myGame);
                     break;
                 }
 
                 default: {
-                    _ai = new AIHardPlayer(_theGame);
+                    ai = new AIHardPlayer(myGame);
                     break;
                 }
             }
 
-            _human = new Player(_theGame);
+            HumanPlayer = new Player(myGame);
 
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             // AddHandler _human.PlayerGrid.Changed, AddressOf GridChanged
             //global::GameController._ai.PlayerGrid.Changed += GridChanged;
             //global::GameController._theGame.AttackCompleted += AttackCompleted;
-            _theGame.AttackCompleted += AttackCompleted;
-            _ai.PlayerGrid.Changed += GridChanged;
+            myGame.AttackCompleted += AttackCompleted;
+            ai.PlayerGrid.Changed += GridChanged;
             AddNewState(GameState.Deploying);
 
         }
@@ -112,9 +110,9 @@ namespace Battleships {
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             // RemoveHandler _human.PlayerGrid.Changed, AddressOf GridChanged
             //global::GameController._ai.PlayerGrid.Changed -= GridChanged;
-            _ai.PlayerGrid.Changed -= GridChanged;
+            ai.PlayerGrid.Changed -= GridChanged;
             //global::GameController._theGame.AttackCompleted -= AttackCompleted;
-            _theGame.AttackCompleted -= AttackCompleted;
+            myGame.AttackCompleted -= AttackCompleted;
 
         }
 
@@ -164,7 +162,7 @@ namespace Battleships {
         private static void AttackCompleted (object sender, AttackResult result) {
 
             bool isHuman;
-            isHuman = _theGame.Player == HumanPlayer;
+            isHuman = myGame.Player == HumanPlayer;
             if (isHuman) {
                 UtilityFunctions.Message = "You " + result.ToString();
             }
@@ -224,8 +222,8 @@ namespace Battleships {
         public static void EndDeployment () {
 
             // deploy the players
-            _theGame.AddDeployedPlayer(_human);
-            _theGame.AddDeployedPlayer(_ai);
+            myGame.AddDeployedPlayer(HumanPlayer);
+            myGame.AddDeployedPlayer(ai);
             SwitchState(GameState.Discovering);
 
         }
@@ -241,7 +239,7 @@ namespace Battleships {
         public static void Attack (int row, int col) {
 
             AttackResult result;
-            result = _theGame.Shoot(row, col);
+            result = myGame.Shoot(row, col);
             CheckAttackResult(result);
 
         }
@@ -255,7 +253,7 @@ namespace Battleships {
         private static void AIAttack () {
 
             AttackResult result;
-            result = _theGame.Player.Attack();
+            result = myGame.Player.Attack();
             CheckAttackResult(result);
 
         }
@@ -272,7 +270,7 @@ namespace Battleships {
 
             switch (result.Value) {
                 case ResultOfAttack.Miss: {
-                    if (_theGame.Player == ComputerPlayer)
+                    if (myGame.Player == ComputerPlayer)
                         AIAttack();
                     break;
                 }
@@ -397,7 +395,7 @@ namespace Battleships {
         /// <param name="state">the new game state</param>
         public static void AddNewState (GameState state) {
 
-            _state.Push(state);
+            GameController.currentState.Push(state);
             UtilityFunctions.Message = "";
 
         }
@@ -418,7 +416,7 @@ namespace Battleships {
         /// </summary>
         public static void EndCurrentState () {
 
-            _state.Pop();
+            currentState.Pop();
 
         }
 
@@ -428,7 +426,7 @@ namespace Battleships {
         /// <param name="setting">the new difficulty level</param>
         public static void SetDifficulty (AIOption setting) {
 
-            _aiSetting = setting;
+            aiSettings = setting;
 
         }
     }

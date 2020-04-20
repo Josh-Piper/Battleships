@@ -5,6 +5,9 @@ using SwinGameSDK;
 
 namespace Battleships {
 
+    /// <summary>
+    /// 
+    /// </summary>
     public class UtilityFunctions {
 
         public const int FIELD_TOP = 122;
@@ -102,7 +105,7 @@ namespace Battleships {
         /// Draws the player's grid and ships.
         /// </summary>
         /// <param name="grid">the grid to show</param>
-        /// <param name="thePlayer">the player to show the ships of</param>
+        /// <param name="player">the player to show the ships of</param>
         /// <param name="small">true if the small grid is shown</param>
         /// <param name="showShips">true if ships are to be shown</param>
         /// <param name="left">the left side of the grid</param>
@@ -112,8 +115,8 @@ namespace Battleships {
         /// <param name="cellWidth">the width of each cell</param>
         /// <param name="cellHeight">the height of each cell</param>
         /// <param name="cellGap">the gap between the cells</param>
-        private static void DrawCustomField (ISeaGrid grid, Player thePlayer, bool small, bool showShips, int left, int top, int width, int height, int cellWidth, int cellHeight, int cellGap) {
-
+        private static void DrawCustomField (ISeaGrid grid, Player player, bool small, bool showShips, int left, int top, int width, int height, int cellWidth, int cellHeight, int cellGap) {
+            
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             //SwinGame.FillRectangle(Color.Blue, left, top, width, height);
 
@@ -182,7 +185,7 @@ namespace Battleships {
             string shipName;
 
             // Draw the ships
-            foreach (Ship s in thePlayer) {
+            foreach (Ship s in player) {
                 if (s is null || !s.IsDeployed)
                     continue;
                 rowTop = top + (cellGap + cellHeight) * s.Row + SHIP_GAP;

@@ -5,6 +5,9 @@ using SwinGameSDK;
 
 namespace Battleships {
 
+    /// <summary>
+    /// Handles all the game resourses and Loading screen
+    /// </summary>
     public static class GameResources {
 
         private static readonly Dictionary<string, Bitmap> images = new Dictionary<string, Bitmap>();
@@ -153,7 +156,9 @@ namespace Battleships {
         }
 
         
-
+        /// <summary>
+        /// Shows the Battleships loading screen
+        /// </summary>
         private static void ShowLoadingScreen () {
 
             background = SwinGame.LoadBitmap(SwinGame.PathToResource("SplashBack.png", ResourceKind.BitmapResource));
@@ -163,56 +168,49 @@ namespace Battleships {
             loaderFull = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_full.png", ResourceKind.BitmapResource));
             loaderEmpty = SwinGame.LoadBitmap(SwinGame.PathToResource("loader_empty.png", ResourceKind.BitmapResource));
 
+            Audio.PlaySoundEffect(soundStart);
             SwinGame.DrawBitmap(background, 0, 0);
             SwinGame.RefreshScreen();
-            SwinGame.ProcessEvents();
-
-            PlaySwinGameIntro();
-
-        }
-
-        private static void PlaySwinGameIntro () {
-
-            Audio.PlaySoundEffect(soundStart);
             SwinGame.ProcessEvents();
             SwinGame.Delay(600);
 
         }
 
+        /// <summary>
+        /// Shows a message on the load bar
+        /// </summary>
+        /// <param name="message">Message to show</param>
+        /// <param name="number">Step number for progress bar</param>
         private static void ShowMessage (string message, int number) {
 
-            const int TX = 310;
-            const int TY = 493;
-            const int TW = 200;
-            const int TH = 25;
-            const int STEPS = 3;
-            const int BG_X = 279;
-            const int BG_Y = 453;
+            SwinGame.DrawBitmap(loaderEmpty, 279, 453);
 
-            //int fullW = 260 * number / STEPS;
-            float fullW = (210f * number / STEPS) + 2.5f;
-
-            SwinGame.DrawBitmap(loaderEmpty, BG_X, BG_Y);
-
-            // Draw progress bar
-            Rectangle loadRect = new Rectangle() { X = BG_X + 23.5f, Y = BG_Y + 19.5f, Width = fullW, Height = 14.5f };
+            // Progress bar
+            Rectangle loadRect = new Rectangle() {
+                X = 302.5f,
+                Y = 472.5f,
+                Width = (210f * number / 3) + 2.5f,
+                Height = 14.5f
+            };
             SwinGame.FillRectangle(Color.DodgerBlue, loadRect);
 
-
-            Rectangle toDraw = default;
-            toDraw.X = TX;
-            toDraw.Y = TY;
-            toDraw.Width = TW;
-            toDraw.Height = TH;
-            SwinGame.DrawText(message, Color.White, Color.Transparent, fontLoading, FontAlignment.AlignCenter, toDraw);
-            /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-            //SwinGame.DrawTextLines(message, Color.White, Color.Transparent, _LoadingFont, FontAlignment.AlignCenter, TX, TY, TW, TH);
+            // Message text
+            Rectangle textArea = new Rectangle {
+                X = 310,
+                Y = 493,
+                Width = 200,
+                Height = 25
+            };
+            SwinGame.DrawText(message, Color.White, Color.Transparent, fontLoading, FontAlignment.AlignCenter, textArea);
 
             SwinGame.RefreshScreen();
             SwinGame.ProcessEvents();
 
         }
 
+        /// <summary>
+        /// End the loading screen and show home screen
+        /// </summary>
         private static void EndLoadingScreen () {
 
             SwinGame.ProcessEvents();
