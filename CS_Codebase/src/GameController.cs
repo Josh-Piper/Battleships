@@ -89,7 +89,6 @@ namespace Battleships {
                     break;
                 }
             }
-
             HumanPlayer = new Player(myGame);
 
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
@@ -97,6 +96,7 @@ namespace Battleships {
             //global::GameController._ai.PlayerGrid.Changed += GridChanged;
             //global::GameController._theGame.AttackCompleted += AttackCompleted;
             myGame.AttackCompleted += AttackCompleted;
+            HumanPlayer.PlayerGrid.Changed += new EventHandler(GridChanged);
             ai.PlayerGrid.Changed += GridChanged;
             AddNewState(GameState.Deploying);
 
@@ -224,8 +224,10 @@ namespace Battleships {
             // deploy the players
             myGame.AddDeployedPlayer(HumanPlayer);
             myGame.AddDeployedPlayer(ai);
-            SwitchState(GameState.Discovering);
             
+            SwitchState(GameState.Discovering);
+           // SwitchState(GameState.Discovering);
+
 
         }
 
@@ -335,7 +337,7 @@ namespace Battleships {
             }
 
             UtilityFunctions.UpdateAnimations();
-         
+            //SwinGame.RefreshScreen();
 
         }
 
@@ -350,6 +352,7 @@ namespace Battleships {
             UtilityFunctions.DrawBackground();
 
             switch (CurrentState) {
+
                 case GameState.ViewingMainMenu: {
                     MenuController.DrawMainMenu();
                     break;
@@ -371,6 +374,7 @@ namespace Battleships {
                 }
 
                 case GameState.Discovering: {
+                        UtilityFunctions.DrawBackground();
                     DiscoveryController.DrawDiscovery();
                     break;
                 }

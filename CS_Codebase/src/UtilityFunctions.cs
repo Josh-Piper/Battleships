@@ -245,7 +245,9 @@ namespace Battleships {
                     break;
                 }
                 case GameState.Discovering: {
-                    break;
+                       SwinGame.DrawBitmap(GameResources.GetImage("Discovery"), 0, 0);
+                     //   DiscoveryController.HandleDiscoveryInput();
+                        break;
                 }
                 case GameState.EndingGame: {
                     SwinGame.DrawBitmap(GameResources.GetImage("Discovery"), 0, 0);
