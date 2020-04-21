@@ -151,7 +151,7 @@ namespace Battleships {
         /// </summary>
         private static void LoadMusic () {
 
-            NewMusic("Background", "horrordrone.mp3");
+            NewMusic("Background", "horrordrone.wav");
 
         }
 
