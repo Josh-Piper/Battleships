@@ -274,7 +274,15 @@ namespace Battleships {
         /// <param name="filename">Name of file in 'Resources/Sounds/'</param>
         private static void NewMusic (string musicName, string filename) {
 
+
+        
+           // Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource));
             music.Add(musicName, Audio.LoadMusic(SwinGame.PathToResource(filename, ResourceKind.SoundResource)));
+            //currently returning null
+            // Audio.LoadMusic(SwinGame.PathToResource(filename));
+
+
+
 
         }
 

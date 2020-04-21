@@ -14,6 +14,9 @@ namespace Battleships {
             // Load Resources
             GameResources.LoadResources();
             SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+     
+       
+            //Audio.PlayMusic(GameResources.GameMusic("Background"));
 
             // Game Loop
             while (!(SwinGame.WindowCloseRequested() == true | GameController.CurrentState == GameState.Quitting)) {

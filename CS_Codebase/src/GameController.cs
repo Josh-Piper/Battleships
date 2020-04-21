@@ -318,6 +318,7 @@ namespace Battleships {
 
                 case GameState.Discovering: {
                     DiscoveryController.HandleDiscoveryInput();
+                        //Why does the screen not refresh / overlap here
                     break;
                 }
 
@@ -333,6 +334,7 @@ namespace Battleships {
             }
 
             UtilityFunctions.UpdateAnimations();
+         
 
         }
 

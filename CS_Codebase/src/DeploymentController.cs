@@ -69,7 +69,7 @@ namespace Battleships {
                     GameController.EndDeployment();
                 }
                 else if (UtilityFunctions.IsMouseInRectangle(UP_DOWN_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
-                    _currentDirection = Direction.LeftRight;
+                    _currentDirection = Direction.UpDown;
                 }
                 else if (UtilityFunctions.IsMouseInRectangle(LEFT_RIGHT_BUTTON_LEFT, TOP_BUTTONS_TOP, DIR_BUTTONS_WIDTH, TOP_BUTTONS_HEIGHT)) {
                     _currentDirection = Direction.LeftRight;
@@ -103,6 +103,7 @@ namespace Battleships {
                     // if in the area try to deploy
                     try {
                         GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
+                       
                     }
                     catch (Exception ex) {
                         Audio.PlaySoundEffect(GameResources.GetSound("Error"));

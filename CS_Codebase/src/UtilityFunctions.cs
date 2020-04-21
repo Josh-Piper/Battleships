@@ -231,7 +231,8 @@ namespace Battleships {
 
             switch (GameController.CurrentState) {
                 case GameState.ViewingMainMenu: {
-                    break;
+                        SwinGame.DrawBitmap(GameResources.GetImage("Menu"), 0, 0);
+                        break;
                 }
                 case GameState.ViewingGameMenu: {
                     break;
