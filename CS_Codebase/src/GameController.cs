@@ -225,6 +225,7 @@ namespace Battleships {
             myGame.AddDeployedPlayer(HumanPlayer);
             myGame.AddDeployedPlayer(ai);
             SwitchState(GameState.Discovering);
+            
 
         }
 
@@ -397,7 +398,7 @@ namespace Battleships {
         /// <param name="state">the new game state</param>
         public static void AddNewState (GameState state) {
 
-            GameController.currentState.Push(state);
+            currentState.Push(state);
             UtilityFunctions.Message = "";
 
         }
