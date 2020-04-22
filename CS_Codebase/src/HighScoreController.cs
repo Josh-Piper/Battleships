@@ -7,186 +7,187 @@ using SwinGameSDK;
 
 namespace Battleships {
 
-    /// <summary>
-    /// Controls displaying and collecting high score data.
-    /// </summary>
-    /// <remarks>
-    /// Data is saved to a file.
-    /// </remarks>
-    public class HighScoreController {
+	/// <summary>
+	/// Controls displaying and collecting high score data.
+	/// </summary>
+	/// <remarks>
+	/// Data is saved to a file.
+	/// </remarks>
+	public class HighScoreController {
 
-        private const int NAME_WIDTH = 3;
-        private const int SCORES_LEFT = 490;
+		private const int NAME_WIDTH = 3;
+		private const int SCORES_LEFT = 490;
 
-        private static List<Score> _Scores = new List<Score>();
+		private static readonly List<Score> scores = new List<Score>();
 
 
-        /// <summary>
-        /// The score structure is used to keep the name and
-        /// score of the top players together.
-        /// </summary>
-        private partial struct Score : IComparable {
+		/// <summary>
+		/// The score structure is used to keep the name and
+		/// score of the top players together.
+		/// </summary>
+		private partial struct Score : IComparable {
 
-            public string Name;
-            public int Value;
+			public string name;
+			public int value;
 
-            /// <summary>
-            /// Allows scores to be compared to facilitate sorting
-            /// </summary>
-            /// <param name="obj">the object to compare to</param>
-            /// <returns>a value that indicates the sort order</returns>
-            public int CompareTo (object obj) {
+			/// <summary>
+			/// Allows scores to be compared to facilitate sorting
+			/// </summary>
+			/// <param name="obj">the object to compare to</param>
+			/// <returns>a value that indicates the sort order</returns>
+			public int CompareTo(object obj) {
 
-                if (obj is Score) {
-                    Score other = (Score)obj;
-                    return other.Value - Value;
-                }
-                else {
-                    return 0;
-                }
+				if (obj is Score other) {
+					return other.value - value;
+				}
+				else {
+					return 0;
+				}
 
-            }
-        }
+			}
+		}
 
-        /// <summary>
-        /// Loads the scores from the highscores text file.
-        /// </summary>
-        /// <remarks>
-        /// The format is
-        /// # of scores
-        /// NNNSSS
-        /// 
-        /// Where NNN is the name and SSS is the score
-        /// </remarks>
-        private static void LoadScores () {
+		/// <summary>
+		/// Loads the scores from the highscores text file.
+		/// </summary>
+		/// <remarks>
+		/// The format is
+		/// # of scores
+		/// NNNSSS
+		/// Where NNN is the name and SSS is the score
+		/// </remarks>
+		private static void LoadScores() {
 
-            string filename = SwinGame.PathToResource("highscores.txt");
-            StreamReader input = new StreamReader(filename);
+			StreamReader input = new StreamReader(SwinGame.PathToResource("highscores.txt"));
 
-            // Read in the # of scores
-            int numScores = Convert.ToInt32(input.ReadLine());
-            _Scores.Clear();
+			scores.Clear();
 
-            for (int i = 1; i < numScores; i++) {
-                Score s;
-                string line = input.ReadLine();
-                s.Name = line.Substring(0, NAME_WIDTH);
-                s.Value = Convert.ToInt32(line.Substring(NAME_WIDTH));
-                _Scores.Add(s);
-            }
+			// Read in the # of scores
+			int numScores = Convert.ToInt32(input.ReadLine());
+			for (int i = 1; i < numScores; i++) {
+				string line = input.ReadLine();
+				Score s = new Score {
+					name = line.Substring(0, NAME_WIDTH),
+					value = Convert.ToInt32(line.Substring(NAME_WIDTH))
+				};
+			}
 
-            input.Close();
+			input.Close();
 
-        }
+		}
 
-        /// <summary>
-        /// Saves the scores back to the highscores text file.
-        /// </summary>
-        /// <remarks>
-        /// The format is
-        /// # of scores
-        /// NNNSSS
-        /// 
-        /// Where NNN is the name and SSS is the score
-        /// </remarks>
-        private static void SaveScores () {
+		/// <summary>
+		/// Saves the scores back to the highscores text file.
+		/// </summary>
+		/// <remarks>
+		/// The format is
+		/// # of scores
+		/// NNNSSS
+		/// 
+		/// Where NNN is the name and SSS is the score
+		/// </remarks>
+		private static void SaveScores() {
 
-            string filename = SwinGame.PathToResource("highscores.txt");
-            StreamWriter output = new StreamWriter(filename);
-            output.WriteLine(_Scores.Count);
-            foreach (Score s in _Scores)
-                output.WriteLine(s.Name + s.Value);
-            output.Close();
+			StreamWriter output = new StreamWriter(SwinGame.PathToResource("highscores.txt"));
 
-        }
+			output.WriteLine(scores.Count);
 
-        /// <summary>
-        /// Draws the high scores to the screen.
-        /// </summary>
-        public static void DrawHighScores () {
+			foreach (Score s in scores)
+				output.WriteLine(s.name + s.value);
 
-            const int SCORES_HEADING = 40;
-            const int SCORES_TOP = 80;
-            const int SCORE_GAP = 30;
+			output.Close();
 
-            if (_Scores.Count == 0)
-                LoadScores();
+		}
 
-            SwinGame.DrawText("   High Scores   ", Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_HEADING);
+		/// <summary>
+		/// Draws the high scores to the screen.
+		/// </summary>
+		public static void DrawHighScores() {
 
-            // For all of the scores
-            for (int i = 0; i < _Scores.Count; i++) {
-                Score s;
-                s = _Scores[i];
+			const int SCORES_HEADING = 40;
+			const int SCORES_TOP = 80;
+			const int SCORE_GAP = 30;
 
-                // For scores 1 - 9 use 01 - 09
-                if (i < 9) {
-                    SwinGame.DrawText(" " + (i + 1) + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
-                }
-                else {
-                    SwinGame.DrawText(i + 1 + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
-                }
-            }
+			if (scores.Count == 0)
+				LoadScores();
 
-        }
+			SwinGame.DrawText("   High Scores   ", Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_HEADING);
 
-        /// <summary>
-        /// Handles the user input during the top score screen.
-        /// </summary>
-        /// <remarks></remarks>
-        public static void HandleHighScoreInput () {
+			// For all of the scores
+			for (int i = 0; i < scores.Count; i++) {
+				Score s;
+				s = scores[i];
+				// For scores 1 - 9 use 01 - 09
+				if (i < 9) {
+					SwinGame.DrawText(" " + (i + 1) + ":   " + s.name + "   " + s.value, Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
+				}
+				else {
+					SwinGame.DrawText(i + 1 + ":   " + s.name + "   " + s.value, Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
+				}
+			}
 
-            if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.EscapeKey) || SwinGame.KeyTyped(KeyCode.ReturnKey)) {
-                GameController.EndCurrentState();
-            }
+		}
 
-        }
+		/// <summary>
+		/// Handles the user input during the top score screen.
+		/// </summary>
+		/// <remarks></remarks>
+		public static void HandleHighScoreInput() {
 
-        /// <summary>
-        /// Read the user's name for their highsSwinGame.
-        /// </summary>
-        /// <param name="value">the player's sSwinGame.</param>
-        /// <remarks>
-        /// This verifies if the score is a highsSwinGame.
-        /// </remarks>
-        public static void ReadHighScore (int value) {
+			if (SwinGame.MouseClicked(MouseButton.LeftButton) || SwinGame.KeyTyped(KeyCode.EscapeKey) || SwinGame.KeyTyped(KeyCode.ReturnKey)) {
+				GameController.EndCurrentState();
+			}
 
-            const int ENTRY_TOP = 500;
+		}
 
-            if (_Scores.Count == 0)
-                LoadScores();
+		/// <summary>
+		/// Read the user's name for their highsSwinGame.
+		/// </summary>
+		/// <param name="value">the player's sSwinGame.</param>
+		/// <remarks>
+		/// This verifies if the score is a highsSwinGame.
+		/// </remarks>
+		public static void ReadHighScore(int value) {
 
-            // Is it a high score
-            if (value > _Scores[_Scores.Count - 1].Value) {
-                Score s = new Score {
-                    Value = value
-                };
-                int x = SCORES_LEFT + SwinGame.TextWidth(GameResources.GetFont("Courier"), "Name: ");
-                GameController.AddNewState(GameState.ViewingHighScores);
-                SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GetFont("Courier"), x, ENTRY_TOP);
+			const int ENTRY_TOP = 500;
 
-                // Reads the text from the user
-                while (SwinGame.ReadingText()) {
-                    SwinGame.ProcessEvents();
-                    UtilityFunctions.DrawBackground();
-                    DrawHighScores();
-                    SwinGame.DrawText("Name: ", Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, ENTRY_TOP);
-                    SwinGame.RefreshScreen();
-                }
+			if (scores.Count == 0)
+				LoadScores();
 
-                s.Name = SwinGame.TextReadAsASCII();
-                if (s.Name.Length < 3) {
-                    s.Name = s.Name + new string(Convert.ToChar(' '), 3 - s.Name.Length);
-                }
+			// Return if this score is not a highscore
+			if (scores.Count > 0  &&  value <= scores[scores.Count - 1].value)
+				return;
 
-                _Scores.RemoveAt(_Scores.Count - 1);
-                _Scores.Add(s);
-                _Scores.Sort();
-                GameController.EndCurrentState();
-            }
+			Score s = new Score {
+				value = value
+			};
 
-        }
+			int x = SCORES_LEFT + SwinGame.TextWidth(GameResources.GetFont("Courier"), "Name: ");
+			GameController.AddNewState(GameState.ViewingHighScores);
+			SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GetFont("Courier"), x, ENTRY_TOP);
 
-    }
+			// Reads the text from the user
+			while (SwinGame.ReadingText()) {
+				SwinGame.ProcessEvents();
+				UtilityFunctions.DrawBackground();
+				DrawHighScores();
+				SwinGame.DrawText("Name: ", Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, ENTRY_TOP);
+				SwinGame.RefreshScreen();
+			}
+
+			s.name = SwinGame.TextReadAsASCII();
+
+			if (s.name.Length < 3) {
+				s.name += new string(Convert.ToChar(' '), 3 - s.name.Length);
+			}
+
+			//scores.RemoveAt(scores.Count - 1);
+			scores.Add(s);
+			scores.Sort();
+			GameController.EndCurrentState();
+
+		}
+
+	}
 
 }

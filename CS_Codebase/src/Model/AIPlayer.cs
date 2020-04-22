@@ -10,18 +10,21 @@ namespace Battleships {
     /// </summary>
     public abstract class AIPlayer : Player {
 
-        /// <summary>
-        /// Location can store the location of the last hit made by an
-        /// AI Player. The use of which determines the difficulty.
-        /// </summary>
-        protected class Location {
+#pragma warning disable CS0660 // SUPPRESS: "Type defines operator == or operator != but does not override Object.Equals(object o)"
+#pragma warning disable CS0661 // SUPPRESS: "Type defines operator == or operator != but does not override Object.GetHashCode()"
 
-            /// <summary>
-            /// The row of the shot
-            /// </summary>
-            /// <value>The row of the shot</value>
-            /// <returns>The row of the shot</returns>
-            public int Row { get; set; }
+		/// <summary>
+		/// Location can store the location of the last hit made by an
+		/// AI Player. The use of which determines the difficulty.
+		/// </summary>
+		protected class Location {
+
+			/// <summary>
+			/// The row of the shot
+			/// </summary>
+			/// <value>The row of the shot</value>
+			/// <returns>The row of the shot</returns>
+			public int Row { get; set; }
 
             /// <summary>
             /// The column of the shot
@@ -63,10 +66,13 @@ namespace Battleships {
                 return loc1 is null || loc2 is null || loc1.Row != loc2.Row || loc1.Column != loc2.Column;
             }
 
-        }
+		}
+
+#pragma warning restore CS0661 // RESTORE: "Type defines operator == or operator != but does not override Object.GetHashCode()"
+#pragma warning restore CS0660 // RESTORE: "Type defines operator == or operator != but does not override Object.Equals(object o)"
 
 
-        public AIPlayer (BattleShipsGame game)
+		public AIPlayer (BattleShipsGame game)
             : base(game) { }
 
         /// <summary>
