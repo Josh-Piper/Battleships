@@ -94,13 +94,13 @@ namespace Battleships {
 
             Point2D mouse = SwinGame.MousePosition();
 
-            // Calculate the row/col clicked
+            // Calculate the row/column clicked
             int row = Convert.ToInt32(Math.Floor((mouse.Y - UtilityFunctions.FIELD_TOP) / (UtilityFunctions.CELL_HEIGHT + UtilityFunctions.CELL_GAP)));
             int col = Convert.ToInt32(Math.Floor((mouse.X - UtilityFunctions.FIELD_LEFT) / (UtilityFunctions.CELL_WIDTH + UtilityFunctions.CELL_GAP)));
 
             if (row >= 0 & row < GameController.HumanPlayer.PlayerGrid.Height) {
                 if (col >= 0 & col < GameController.HumanPlayer.PlayerGrid.Width) {
-                    // if in the area try to deploy
+                    // If in the area try to deploy
                     try {
                         GameController.HumanPlayer.PlayerGrid.MoveShip(row, col, _selectedShip, _currentDirection);
                        

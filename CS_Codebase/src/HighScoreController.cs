@@ -119,7 +119,7 @@ namespace Battleships {
                 Score s;
                 s = _Scores[i];
 
-                // for scores 1 - 9 use 01 - 09
+                // For scores 1 - 9 use 01 - 09
                 if (i < 9) {
                     SwinGame.DrawText(" " + (i + 1) + ":   " + s.Name + "   " + s.Value, Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
                 }
@@ -156,7 +156,7 @@ namespace Battleships {
             if (_Scores.Count == 0)
                 LoadScores();
 
-            // is it a high score
+            // Is it a high score
             if (value > _Scores[_Scores.Count - 1].Value) {
                 Score s = new Score {
                     Value = value
@@ -165,7 +165,7 @@ namespace Battleships {
                 GameController.AddNewState(GameState.ViewingHighScores);
                 SwinGame.StartReadingText(Color.White, NAME_WIDTH, GameResources.GetFont("Courier"), x, ENTRY_TOP);
 
-                // Read the text from the user
+                // Reads the text from the user
                 while (SwinGame.ReadingText()) {
                     SwinGame.ProcessEvents();
                     UtilityFunctions.DrawBackground();

@@ -4,10 +4,12 @@ using System.Collections.Generic;
 using SwinGameSDK;
 
 
-namespace Battleships {
+namespace Battleships
+{
 
     /// <summary>
-    /// 
+    /// The GameController is responsible for controlling the game,
+    /// managing user input, and displaying the current state of the game.
     /// </summary>
     public class GameController {
 
@@ -50,10 +52,10 @@ namespace Battleships {
 
         static GameController () {
 
-            // bottom state will be quitting. If player exits main menu then the game is over
+            // Bottom state will be quitting. If player exits main menu then the game is over
             currentState.Push(GameState.Quitting);
 
-            // at the start the player is viewing the main menu
+            // At the start the player is viewing the main menu
             currentState.Push(GameState.ViewingMainMenu);
 
         }
@@ -72,7 +74,7 @@ namespace Battleships {
             // Create the game
             myGame = new BattleShipsGame();
 
-            // create the players
+            // Create the players
             switch (aiSettings) {
                 case AIOption.Medium: {
                     ai = new AIMediumPlayer(myGame);
@@ -221,7 +223,7 @@ namespace Battleships {
         /// </remarks>
         public static void EndDeployment () {
 
-            // deploy the players
+            // Deploy the players
             myGame.AddDeployedPlayer(HumanPlayer);
             myGame.AddDeployedPlayer(ai);
             

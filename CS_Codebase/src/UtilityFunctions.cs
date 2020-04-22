@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using SwinGameSDK;
 
 
-namespace Battleships {
-
+namespace Battleships
+{
     /// <summary>
-    /// 
+    /// This includes a number of utility methods for
+    /// drawing and interacting with the Mouse.
     /// </summary>
     public class UtilityFunctions {
 
@@ -38,7 +39,7 @@ namespace Battleships {
 
 
         /// <summary>
-        /// The message to display
+        /// The message to display.
         /// </summary>
         /// <value>The message to display</value>
         /// <returns>The message to display</returns>
@@ -59,7 +60,7 @@ namespace Battleships {
             bool result = false;
             mouse = SwinGame.MousePosition();
 
-            // if the mouse is inline with the button horizontally
+            // If the mouse is inline with the button horizontally
             if (mouse.X >= x & mouse.X <= x + w) {
                 // Check vertical position
                 if (mouse.Y >= y & mouse.Y <= y + h) {
@@ -84,7 +85,7 @@ namespace Battleships {
         }
 
         /// <summary>
-        /// Draws a small field, showing the attacks made and the locations of the player's ships
+        /// Draws a small field, showing the attacks made and the locations of the player's ships.
         /// </summary>
         /// <param name="grid">the grid to show</param>
         /// <param name="thePlayer">the player to show the ships of</param>
@@ -204,7 +205,7 @@ namespace Battleships {
 
                 if (!small) {
                     //should it draw several tiny ships
-                    //putting in the wrong shipName
+                    //Putting in the wrong shipName
                     SwinGame.DrawBitmap(GameResources.GetImage(shipName), colLeft, rowTop);
                 }
                 else {

@@ -96,7 +96,7 @@ namespace Battleships {
                 }
 
                 if (level > 0) {
-                    // none clicked - so end this sub menu
+                    // None clicked - so end this sub menu
                     GameController.EndCurrentState();
                 }
 
@@ -315,8 +315,10 @@ namespace Battleships {
                 }
 
                 case GAME_MENU_SURRENDER_BUTTON: {
-                    GameController.EndCurrentState(); // end game menu
-                    GameController.EndCurrentState(); // end game
+                    // End game menu
+                    GameController.EndCurrentState();
+                    // End game
+                    GameController.EndCurrentState();
                     break;
                 }
 
