@@ -12,10 +12,10 @@ namespace Battleships {
 	/// </summary>
 	public class GameController {
 
-		private static BattleShipsGame myGame;
-		private static AIPlayer ai;
-		private static readonly Stack<GameState> currentState = new Stack<GameState>();
-		private static AIOption aiSettings;
+		private static BattleShipsGame _myGame;
+		private static AIPlayer _ai;
+		private static readonly Stack<GameState> _currentState = new Stack<GameState>();
+		private static AIOption _aiSettings;
 
 
 		/// <summary>
@@ -26,7 +26,7 @@ namespace Battleships {
 		/// <returns>The current state</returns>
 		public static GameState CurrentState {
 			get {
-				return currentState.Peek();
+				return _currentState.Peek();
 			}
 		}
 
@@ -44,7 +44,7 @@ namespace Battleships {
 		/// <returns>the conputer player</returns>
 		public static Player ComputerPlayer {
 			get {
-				return ai;
+				return _ai;
 			}
 		}
 
@@ -52,10 +52,10 @@ namespace Battleships {
 		static GameController() {
 
 			// Bottom state will be quitting. If player exits main menu then the game is over
-			currentState.Push(GameState.Quitting);
+			_currentState.Push(GameState.Quitting);
 
 			// At the start the player is viewing the main menu
-			currentState.Push(GameState.ViewingMainMenu);
+			_currentState.Push(GameState.ViewingMainMenu);
 
 		}
 
@@ -63,39 +63,39 @@ namespace Battleships {
 		/// Starts a new game.
 		/// </summary>
 		/// <remarks>
-		/// Creates an AI player based upon the _aiSetting.
+		/// Creates an _ai player based upon the _aiSetting.
 		/// </remarks>
 		public static void StartGame() {
 
-			if (myGame is object)
+			if (_myGame is object)
 				EndGame();
 
 			// Create the game
-			myGame = new BattleShipsGame();
+			_myGame = new BattleShipsGame();
 
 			// Create the player
-			HumanPlayer = new Player(myGame);
+			HumanPlayer = new Player(_myGame);
 
-			// Create the AI
-			switch (aiSettings) {
+			// Create the _ai
+			switch (_aiSettings) {
 				case AIOption.Medium: {
-					ai = new AIMediumPlayer(myGame);
+					_ai = new AIMediumPlayer(_myGame);
 					break;
 				}
 				case AIOption.Hard: {
-					ai = new AIHardPlayer(myGame);
+					_ai = new AIHardPlayer(_myGame);
 					break;
 				}
 				default: {
-					ai = new AIHardPlayer(myGame);
+					_ai = new AIHardPlayer(_myGame);
 					break;
 				}
 			}
 
 			// Assign events
-			myGame.AttackCompleted += AttackCompleted;
+			_myGame.AttackCompleted += AttackCompleted;
 			HumanPlayer.PlayerGrid.Changed += GridChanged;
-			ai.PlayerGrid.Changed += GridChanged;
+			_ai.PlayerGrid.Changed += GridChanged;
 
 			// Add `Deploying` state
 			AddNewState(GameState.Deploying);
@@ -108,9 +108,9 @@ namespace Battleships {
 		private static void EndGame() {
 
 			// Remove current event listeners
-			myGame.AttackCompleted -= AttackCompleted;
+			_myGame.AttackCompleted -= AttackCompleted;
 			HumanPlayer.PlayerGrid.Changed -= GridChanged;
-			ai.PlayerGrid.Changed -= GridChanged;
+			_ai.PlayerGrid.Changed -= GridChanged;
 
 		}
 
@@ -171,13 +171,13 @@ namespace Battleships {
 		/// </remarks>
 		private static void AttackCompleted(object sender, AttackResult result) {
 
-			bool isHuman = myGame.Player == HumanPlayer;
+			bool isHuman = _myGame.Player == HumanPlayer;
 
 			if (isHuman) {
 				UtilityFunctions.Message = "You " + result.ToString();
 			}
 			else {
-				UtilityFunctions.Message = "The AI " + result.ToString();
+				UtilityFunctions.Message = "The _ai " + result.ToString();
 			}
 
 			switch (result.Value) {
@@ -228,8 +228,8 @@ namespace Battleships {
 		public static void EndDeployment() {
 
 			// Deploy the players
-			myGame.AddDeployedPlayer(HumanPlayer);
-			myGame.AddDeployedPlayer(ai);
+			_myGame.AddDeployedPlayer(HumanPlayer);
+			_myGame.AddDeployedPlayer(_ai);
 
 			SwitchState(GameState.Discovering);
 
@@ -245,20 +245,20 @@ namespace Battleships {
 		/// </remarks>
 		public static void Attack(int row, int col) {
 
-			AttackResult result = myGame.Shoot(row, col);
+			AttackResult result = _myGame.Shoot(row, col);
 			CheckAttackResult(result);
 
 		}
 
 		/// <summary>
-		/// Gets the AI to attack.
+		/// Gets the _ai to attack.
 		/// </summary>
 		/// <remarks>
 		/// Checks the attack result once the attack is complete.
 		/// </remarks>
 		private static void AIAttack() {
 
-			AttackResult result = myGame.Player.Attack();
+			AttackResult result = _myGame.Player.Attack();
 			CheckAttackResult(result);
 
 		}
@@ -269,13 +269,13 @@ namespace Battleships {
 		/// </summary>
 		/// <param name="result">the result of the last
 		/// attack</param>
-		/// <remarks>Gets the AI to attack if the result switched
-		/// to the AI player.</remarks>
+		/// <remarks>Gets the _ai to attack if the result switched
+		/// to the _ai player.</remarks>
 		private static void CheckAttackResult(AttackResult result) {
 
 			switch (result.Value) {
 				case ResultOfAttack.Miss: {
-					if (myGame.Player == ComputerPlayer)
+					if (_myGame.Player == ComputerPlayer)
 						AIAttack();
 					break;
 				}
@@ -391,7 +391,7 @@ namespace Battleships {
 		/// <param name="state">the new game state</param>
 		public static void AddNewState(GameState state) {
 
-			currentState.Push(state);
+			_currentState.Push(state);
 			UtilityFunctions.Message = "";
 
 		}
@@ -412,7 +412,7 @@ namespace Battleships {
 		/// </summary>
 		public static void EndCurrentState() {
 
-			currentState.Pop();
+			_currentState.Pop();
 
 		}
 
@@ -422,7 +422,7 @@ namespace Battleships {
 		/// <param name="setting">the new difficulty level</param>
 		public static void SetDifficulty(AIOption setting) {
 
-			aiSettings = setting;
+			_aiSettings = setting;
 
 		}
 	}
