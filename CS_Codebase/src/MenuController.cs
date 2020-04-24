@@ -10,11 +10,15 @@ namespace Battleships {
     /// <remarks>
     /// These are the text captions for the menu items.
     /// </remarks>
-    
-    public class MenuController {
-        public static bool MusicPlaying { get; set; } = true;
+    public class Extentions
+    {
         public static string MusicPlayingWord { get; set; } = "MUTE";
-        private static string[][] _menuStructure = new[] { new string[] { "PLAY", "SETUP", "SCORES", "QUIT" }, new string[] { "RETURN", "SURRENDER", "QUIT", MusicPlayingWord }, new string[] { "EASY", "MEDIUM", "HARD" } };
+        public static bool MusicPlaying { get; set; } = true;
+    }
+    public class MenuController {
+        
+        
+        private static string[][] _menuStructure = new[] { new string[] { "PLAY", "SETUP", "SCORES", "QUIT" }, new string[] { "RETURN", "SURRENDER", "QUIT", Extentions.MusicPlayingWord }, new string[] { "EASY", "MEDIUM", "HARD" } };
         private const int MENU_TOP = 575;
         private const int MENU_LEFT = 30;
         private const int MENU_GAP = 0;
@@ -336,15 +340,17 @@ namespace Battleships {
                 case GAME_MENU_MUTE_BUTTON:
                     {
                         //GameController.AddNewState(GameState.Quitting);
-                        if (MusicPlaying == false)
+                        if (Extentions.MusicPlaying == false)
                         {
                             SwinGame.PlayMusic(GameResources.GameMusic("Background"));
-                            MusicPlaying = true;
-                            MenuController.MusicPlayingWord = "MUTE";
-                        } else if (MusicPlaying == true) {  
+                            Extentions.MusicPlaying = true;
+                            Extentions.MusicPlayingWord = "MUTE";
+                            DrawButtons(GAME_MENU);
+                        } else if (Extentions.MusicPlaying == true) {  
                             SwinGame.StopMusic();
-                            MusicPlaying = false;
-                            MenuController.MusicPlayingWord = "UNMUTE";
+                            Extentions.MusicPlaying = false;
+                            Extentions.MusicPlayingWord = "UNMUTE";
+                            DrawButtons(GAME_MENU);
                             SwinGame.RefreshScreen();
                             
                         }

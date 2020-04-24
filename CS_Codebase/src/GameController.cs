@@ -138,8 +138,12 @@ namespace Battleships {
 			if (showAnimation) {
 				UtilityFunctions.AddExplosion(row, column);
 			}
+			if (Extentions.MusicPlaying == true) { 
+				Audio.PlaySoundEffect(GameResources.GetSound("Hit"));
+			} else if (Extentions.MusicPlaying == false)
+			{
 
-			Audio.PlaySoundEffect(GameResources.GetSound("Hit"));
+			}
 			UtilityFunctions.DrawAnimationSequence();
 
 		}
@@ -156,7 +160,13 @@ namespace Battleships {
 				UtilityFunctions.AddSplash(row, column);
 			}
 
-			Audio.PlaySoundEffect(GameResources.GetSound("Miss"));
+			if (Extentions.MusicPlaying == true)
+			{
+				Audio.PlaySoundEffect(GameResources.GetSound("Miss"));
+			} else if (Extentions.MusicPlaying == false)
+			{
+
+			}
 			UtilityFunctions.DrawAnimationSequence();
 
 		}
@@ -183,7 +193,14 @@ namespace Battleships {
 			switch (result.Value) {
 				case ResultOfAttack.Destroyed: {
 					PlayHitSequence(result.Row, result.Column, isHuman);
-					Audio.PlaySoundEffect(GameResources.GetSound("Sink"));
+						if (Extentions.MusicPlaying == true)
+						{
+							Audio.PlaySoundEffect(GameResources.GetSound("Sink"));
+						} else if (Extentions.MusicPlaying == false)
+						{
+
+						}
+					
 					break;
 				}
 				case ResultOfAttack.GameOver: {
@@ -194,10 +211,13 @@ namespace Battleships {
 						SwinGame.RefreshScreen();
 					}
 					if (HumanPlayer.IsDestroyed) {
-						Audio.PlaySoundEffect(GameResources.GetSound("Lose"));
+						if (Extentions.MusicPlaying == true)
+							Audio.PlaySoundEffect(GameResources.GetSound("Lose"));
+						
 					}
 					else {
-						Audio.PlaySoundEffect(GameResources.GetSound("Winner"));
+						if (Extentions.MusicPlaying == true)
+							Audio.PlaySoundEffect(GameResources.GetSound("Winner"));
 					}
 					break;
 				}
@@ -210,8 +230,10 @@ namespace Battleships {
 					break;
 				}
 				case ResultOfAttack.ShotAlready: {
-					Audio.PlaySoundEffect(GameResources.GetSound("Error"));
-					break;
+						if (Extentions.MusicPlaying == true)
+							Audio.PlaySoundEffect(GameResources.GetSound("Error"));
+
+						break;
 				}
 			}
 
