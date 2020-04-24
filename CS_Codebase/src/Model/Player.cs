@@ -14,7 +14,7 @@ namespace Battleships {
     public class Player : IEnumerable {
 
         protected static Random _Random = new Random();
-        private readonly Dictionary<ShipName, Ship> _Ships = new Dictionary<ShipName, Ship>();
+        private readonly Dictionary<ShipName, Ship> _ships = new Dictionary<ShipName, Ship>();
         protected BattleShipsGame _game;
 
         /// <summary>
@@ -98,12 +98,12 @@ namespace Battleships {
         public Player (BattleShipsGame controller) {
 
             _game = controller;
-            PlayerGrid = new SeaGrid(_Ships);
+            PlayerGrid = new SeaGrid(_ships);
 
             // for each ship add the ships name so the seagrid knows about them
             foreach (ShipName name in Enum.GetValues(typeof(ShipName))) {
                 if (name != ShipName.None) {
-                    _Ships.Add(name, new Ship(name));
+                    _ships.Add(name, new Ship(name));
                 }
             }
 
@@ -123,7 +123,7 @@ namespace Battleships {
             if (name == ShipName.None)
                 return default;
             
-            return _Ships[name];
+            return _ships[name];
 
         }
 
@@ -134,8 +134,8 @@ namespace Battleships {
         /// <returns>A Ship enumerator</returns>
         public IEnumerator<Ship> GetShipEnumerator () {
 
-            Ship[] result = new Ship[_Ships.Values.Count + 1];
-            _Ships.Values.CopyTo(result, 0);
+            Ship[] result = new Ship[_ships.Values.Count + 1];
+            _ships.Values.CopyTo(result, 0);
             List<Ship> lst = new List<Ship>();
             lst.AddRange(result);
             return lst.GetEnumerator();
@@ -149,8 +149,8 @@ namespace Battleships {
         /// <returns>A Ship enumerator</returns>
         public IEnumerator GetEnumerator () {
 
-            Ship[] result = new Ship[_Ships.Values.Count + 1];
-            _Ships.Values.CopyTo(result, 0);
+            Ship[] result = new Ship[_ships.Values.Count + 1];
+            _ships.Values.CopyTo(result, 0);
             List<Ship> lst = new List<Ship>();
             lst.AddRange(result);
 

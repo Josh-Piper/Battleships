@@ -18,7 +18,7 @@ namespace Battleships {
 		private const int NAME_WIDTH = 3;
 		private const int SCORES_LEFT = 490;
 
-		private static readonly List<Score> scores = new List<Score>();
+		private static readonly List<Score> _scores = new List<Score>();
 
 
 		/// <summary>
@@ -60,7 +60,7 @@ namespace Battleships {
 
 			StreamReader input = new StreamReader(SwinGame.PathToResource("highscores.txt"));
 
-			scores.Clear();
+			_scores.Clear();
 
 			// Read in the # of scores
 			int numScores = Convert.ToInt32(input.ReadLine());
@@ -90,9 +90,9 @@ namespace Battleships {
 
 			StreamWriter output = new StreamWriter(SwinGame.PathToResource("highscores.txt"));
 
-			output.WriteLine(scores.Count);
+			output.WriteLine(_scores.Count);
 
-			foreach (Score s in scores)
+			foreach (Score s in _scores)
 				output.WriteLine(s.name + s.value);
 
 			output.Close();
@@ -108,15 +108,15 @@ namespace Battleships {
 			const int SCORES_TOP = 80;
 			const int SCORE_GAP = 30;
 
-			if (scores.Count == 0)
+			if (_scores.Count == 0)
 				LoadScores();
 
 			SwinGame.DrawText("   High Scores   ", Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_HEADING);
 
 			// For all of the scores
-			for (int i = 0; i < scores.Count; i++) {
+			for (int i = 0; i < _scores.Count; i++) {
 				Score s;
-				s = scores[i];
+				s = _scores[i];
 				// For scores 1 - 9 use 01 - 09
 				if (i < 9) {
 					SwinGame.DrawText(" " + (i + 1) + ":   " + s.name + "   " + s.value, Color.White, GameResources.GetFont("Courier"), SCORES_LEFT, SCORES_TOP + i * SCORE_GAP);
@@ -151,11 +151,11 @@ namespace Battleships {
 
 			const int ENTRY_TOP = 500;
 
-			if (scores.Count == 0)
+			if (_scores.Count == 0)
 				LoadScores();
 
 			// Return if this score is not a highscore
-			if (scores.Count > 0  &&  value <= scores[scores.Count - 1].value)
+			if (_scores.Count > 0  &&  value <= _scores[_scores.Count - 1].value)
 				return;
 
 			Score s = new Score {
@@ -182,8 +182,8 @@ namespace Battleships {
 			}
 
 			//scores.RemoveAt(scores.Count - 1);
-			scores.Add(s);
-			scores.Sort();
+			_scores.Add(s);
+			_scores.Sort();
 			GameController.EndCurrentState();
 
 		}

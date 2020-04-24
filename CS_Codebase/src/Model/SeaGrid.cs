@@ -18,8 +18,8 @@ namespace Battleships {
         private const int _WIDTH = 10;
         private const int _HEIGHT = 10;
 
-        private Tile[,] _GameTiles;
-        private Dictionary<ShipName, Ship> _Ships;
+        private Tile[,] _gameTiles;
+        private Dictionary<ShipName, Ship> _ships;
 
 
         /// <summary>
@@ -30,7 +30,7 @@ namespace Battleships {
 
         /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
         public TileView this[int x, int y] {
-            get { return _GameTiles[x, y].View; }
+            get { return _gameTiles[x, y].View; }
         }
 
         /// <summary>
@@ -61,7 +61,7 @@ namespace Battleships {
         /// </summary>
         public bool AllDeployed {
             get {
-                foreach (Ship s in _Ships.Values) {
+                foreach (Ship s in _ships.Values) {
                     if (!s.IsDeployed) {
                         return false;
                     }
@@ -80,7 +80,7 @@ namespace Battleships {
         /// <returns></returns>
         //public TileView get_Item(int x, int y) {
 
-        //    return _GameTiles[x, y].View;
+        //    return _gameTiles[x, y].View;
 
         //}
 
@@ -88,15 +88,15 @@ namespace Battleships {
         /// SeaGrid constructor, a seagrid has a number of tiles stored in an array
         /// </summary>
         public SeaGrid( Dictionary<ShipName, Ship> ships ) {
-            _GameTiles = new Tile[Width, Height];
+            _gameTiles = new Tile[Width, Height];
             // fill array with empty Tiles
             for (int i = 0; i < Width; i++) {
                 for (int j = 0; j < Height; j++) {
-                    _GameTiles[i, j] = new Tile(i, j, null);
+                    _gameTiles[i, j] = new Tile(i, j, null);
                 }
             }
 
-            _Ships = ships;
+            _ships = ships;
 
         }
 
@@ -109,7 +109,7 @@ namespace Battleships {
         /// <param name="direction">the direction the ship is going</param>
         public void MoveShip( int row, int col, ShipName ship, Direction direction ) {
 
-            Ship newShip = _Ships[ship];
+            Ship newShip = _ships[ship];
             newShip.Remove();
             AddShip(row, col, direction, newShip);
 
@@ -144,7 +144,7 @@ namespace Battleships {
                     if (currentRow < 0 | currentRow >= Width | currentCol < 0 | currentCol >= Height) {
                         throw new InvalidOperationException("Ship can't fit on the board");
                     }
-                    _GameTiles[currentRow, currentCol].Ship = newShip;
+                    _gameTiles[currentRow, currentCol].Ship = newShip;
                     currentCol += dCol;
                     currentRow += dRow;
                 }
@@ -172,22 +172,22 @@ namespace Battleships {
 
             try {
                 // tile is already hit
-                if (_GameTiles[row, col].Shot) {
+                if (_gameTiles[row, col].Shot) {
                     return new AttackResult(ResultOfAttack.ShotAlready, "have already attacked [" + col + "," + row + "]!", row, col);
                 }
 
-                _GameTiles[row, col].Shoot();
+                _gameTiles[row, col].Shoot();
 
                 // there is no ship on the tile
-                if (_GameTiles[row, col].Ship is null) {
+                if (_gameTiles[row, col].Ship is null) {
                     return new AttackResult(ResultOfAttack.Miss, "missed", row, col);
                 }
 
                 // all ship's tiles have been destroyed
-                if (_GameTiles[row, col].Ship.IsDestroyed) {
-                    _GameTiles[row, col].Shot = true;
+                if (_gameTiles[row, col].Ship.IsDestroyed) {
+                    _gameTiles[row, col].Shot = true;
                     ShipsKilled += 1;
-                    return new AttackResult(ResultOfAttack.Destroyed, _GameTiles[row, col].Ship, "destroyed the enemy's", row, col);
+                    return new AttackResult(ResultOfAttack.Destroyed, _gameTiles[row, col].Ship, "destroyed the enemy's", row, col);
                 }
 
                 // else hit but not destroyed
