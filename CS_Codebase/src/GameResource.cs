@@ -1,6 +1,9 @@
 ﻿
 using System.Collections.Generic;
 using SwinGameSDK;
+using System;
+using System.IO;
+
 
 
 namespace Battleships {
@@ -296,7 +299,15 @@ namespace Battleships {
             FreeMusic();
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             /// - This crashes game
-            //Free_sounds();
+            try
+            {
+
+            Free_sounds();
+
+            } catch (Exception e)
+            {
+                Console.WriteLine("{0}", e.Message);
+            }
             SwinGame.ProcessEvents();
 
         }
@@ -327,8 +338,17 @@ namespace Battleships {
 
             /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             /// This crashes game
-            foreach (SoundEffect obj in _sounds.Values)
-                Audio.FreeSoundEffect(obj);
+          
+              //foreach (SoundEffect obj in _sounds.Values) { 
+               // try { 
+                //Audio.FreeSoundEffect(obj);
+               //// } catch (Exception e)
+                {
+                //     Console.WriteLine(e.Message);
+                // }
+                Audio.ReleaseAllSoundEffects();
+               
+            }
 
         }
 

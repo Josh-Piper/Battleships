@@ -23,7 +23,7 @@ namespace Battleships {
 
             string message = (GameController.HumanPlayer.IsDestroyed) ? "You Lose!" : "-- You Win --";
             SwinGame.DrawText(message, Color.White, Color.Transparent, GameResources.GetFont("ArialLarge"), FontAlignment.AlignCenter, toDraw);
-
+          
         }
 
         /// <summary>

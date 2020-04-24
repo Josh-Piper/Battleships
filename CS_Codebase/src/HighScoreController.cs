@@ -15,7 +15,7 @@ namespace Battleships {
 	/// </remarks>
 	public class HighScoreController {
 
-		private const int NAME_WIDTH = 3;
+		private const int NAME_WIDTH = 10;
 		private const int SCORES_LEFT = 490;
 
 		private static readonly List<Score> _scores = new List<Score>();
