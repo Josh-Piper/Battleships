@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 using SwinGameSDK;
 
 
@@ -10,10 +10,11 @@ namespace Battleships {
     /// <remarks>
     /// These are the text captions for the menu items.
     /// </remarks>
+    
     public class MenuController {
-
-        private readonly static string[][] _menuStructure = new[] { new string[] { "PLAY", "SETUP", "SCORES", "QUIT" }, new string[] { "RETURN", "SURRENDER", "QUIT" }, new string[] { "EASY", "MEDIUM", "HARD" } };
-
+        public static bool MusicPlaying { get; set; } = true;
+        public static string MusicPlayingWord { get; set; } = "MUTE";
+        private static string[][] _menuStructure = new[] { new string[] { "PLAY", "SETUP", "SCORES", "QUIT" }, new string[] { "RETURN", "SURRENDER", "QUIT", MusicPlayingWord }, new string[] { "EASY", "MEDIUM", "HARD" } };
         private const int MENU_TOP = 575;
         private const int MENU_LEFT = 30;
         private const int MENU_GAP = 0;
@@ -35,9 +36,11 @@ namespace Battleships {
         private const int GAME_MENU_RETURN_BUTTON = 0;
         private const int GAME_MENU_SURRENDER_BUTTON = 1;
         private const int GAME_MENU_QUIT_BUTTON = 2;
+        private const int GAME_MENU_MUTE_BUTTON = 3;
         private readonly static Color MENU_COLOR = SwinGame.RGBAColor(2, 167, 252, 255);
         private readonly static Color HIGHLIGHT_COLOR = SwinGame.RGBAColor(1, 57, 86, 255);
-
+      
+       
         /// <summary>
         /// Handles the processing of user input when the main menu is showing
         /// </summary>
@@ -58,11 +61,15 @@ namespace Battleships {
             }
 
         }
-
+        
+        
+       
+        
+        
         /// <summary>
         /// Handle input in the game menu.
         /// </summary>
-        /// <remarks>
+        /// <remarks>u
         /// Player can return to the game, surrender, or quit entirely
         /// </remarks>
         public static void HandleGameMenuInput () {
@@ -326,6 +333,24 @@ namespace Battleships {
                     GameController.AddNewState(GameState.Quitting);
                     break;
                 }
+                case GAME_MENU_MUTE_BUTTON:
+                    {
+                        //GameController.AddNewState(GameState.Quitting);
+                        if (MusicPlaying == false)
+                        {
+                            SwinGame.PlayMusic(GameResources.GameMusic("Background"));
+                            MusicPlaying = true;
+                            MenuController.MusicPlayingWord = "MUTE";
+                        } else if (MusicPlaying == true) {  
+                            SwinGame.StopMusic();
+                            MusicPlaying = false;
+                            MenuController.MusicPlayingWord = "UNMUTE";
+                            SwinGame.RefreshScreen();
+                            
+                        }
+                        GameController.EndCurrentState();
+                        break;
+                    }
 
             }
         }
