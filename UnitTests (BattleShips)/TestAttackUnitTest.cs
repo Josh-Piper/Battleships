@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 using NUnit.Framework;
 using Battleships;
 
-namespace MuteButtonUnitTest
+namespace TestAttackUnitTest
 {
     [TestFixture]
 
 
-    public class InventoryTests
+    public class TestAttackUnitTest
     {
         //declaration
+        private BattleShipsGame _game;
 
         [SetUp]
         public void SetUp()
         {
-
+            _game = new BattleShipsGame();
         }
 
         [Test]
