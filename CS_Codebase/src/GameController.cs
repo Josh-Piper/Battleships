@@ -29,6 +29,9 @@ namespace Battleships {
 				return _currentState.Peek();
 			}
 		}
+		public AIOption getOption { get { return _aiSettings; } }
+		public static AIOption Difficulty { get { return _aiSettings; } }
+		public BattleShipsGame getGame { get { return _myGame; } }
 
 		/// <summary>
 		/// Returns the human player.
@@ -47,6 +50,8 @@ namespace Battleships {
 				return _ai;
 			}
 		}
+
+		
 
 
 		static GameController() {
