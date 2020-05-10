@@ -65,11 +65,7 @@ namespace Battleships {
             }
 
         }
-        
-        
-       
-        
-        
+
         /// <summary>
         /// Handle input in the game menu.
         /// </summary>
@@ -123,8 +119,7 @@ namespace Battleships {
         public static void DrawMainMenu () {
 
             // Clears the Screen to Black
-            /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-            // SwinGame.DrawText("Main Menu", Color.White, GameFont("ArialLarge"), 50, 50)
+            SwinGame.DrawText("Main Menu", Color.White, GameResources.GetFont("ArialLarge"), 50, 50);
             DrawButtons(MAIN_MENU);
 
         }
@@ -134,9 +129,8 @@ namespace Battleships {
         /// </summary>
         public static void DrawGameMenu () {
 
-            /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             // Clears the Screen to Black
-            // SwinGame.DrawText("Paused", Color.White, GameFont("ArialLarge"), 50, 50)
+            SwinGame.DrawText("Paused", Color.White, GameResources.GetFont("ArialLarge"), 50, 50);
             DrawButtons(GAME_MENU);
 
         }
@@ -149,11 +143,7 @@ namespace Battleships {
         /// </remarks>
         public static void DrawSettings () {
 
-
-            /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
             // Clears the Screen to Black
-            // SwinGame.DrawText("Settings", Color.White, GameFont("ArialLarge"), 50, 50)
-
             DrawButtons(MAIN_MENU);
             DrawButtons(SETUP_MENU, 1, 1);
 
@@ -188,15 +178,11 @@ namespace Battleships {
             for (int i = 0; i < _menuStructure[menu].Length; i++) {
                 int btnLeft;
                 btnLeft = MENU_LEFT + BUTTON_SEP * (i + xOffset);
-                /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-                // SwinGame.FillRectangle(Color.White, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT)
                 toDraw.X = btnLeft + TEXT_OFFSET;
                 toDraw.Y = btnTop + TEXT_OFFSET;
                 toDraw.Width = BUTTON_WIDTH;
                 toDraw.Height = BUTTON_HEIGHT;
                 SwinGame.DrawText(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GetFont("Menu"), FontAlignment.AlignCenter, toDraw);
-                /////////////////////////////////////////////////////// Todo /////////////////////////////////////////////////////////
-                //SwinGame.DrawTextLines(_menuStructure[menu][i], MENU_COLOR, Color.Black, GameResources.GameFont("Menu"), FontAlignment.AlignCenter, toDraw);
                 if (SwinGame.MouseDown(MouseButton.LeftButton) & IsMouseOverMenu(i, level, xOffset)) {
                     SwinGame.DrawRectangle(HIGHLIGHT_COLOR, btnLeft, btnTop, BUTTON_WIDTH, BUTTON_HEIGHT);
                 }

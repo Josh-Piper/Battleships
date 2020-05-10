@@ -98,7 +98,7 @@ namespace Battleships {
         /// </summary>
         private static void Load_fonts () {
 
-            NewFont("ArialLarge", "arial.ttf", 80);
+            NewFont("ArialLarge", "arial.ttf", 72);
             NewFont("Courier", "cour.ttf", 14);
             NewFont("CourierSmall", "cour.ttf", 8);
             NewFont("Menu", "ffaccess.ttf", 8);
