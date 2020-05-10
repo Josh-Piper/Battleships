@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyGameWin", "MyGameWin.csproj", "{A9DCAC72-BC77-4C33-BE70-BBFD31D7C798}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests (BattleShips)", "..\UnitTests (BattleShips)\UnitTests (BattleShips).csproj", "{2B3DFC93-8D42-4F8E-8E1E-28778CD2F65D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CS_UnitTests", "..\UnitTests (BattleShips)\CS_UnitTests.csproj", "{2B3DFC93-8D42-4F8E-8E1E-28778CD2F65D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

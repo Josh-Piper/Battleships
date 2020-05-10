@@ -54,11 +54,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChangeDifficultyUnitTest.cs" />
-    <Compile Include="OverallTests.cs" />
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestAttackUnitTest.cs" />
+    <Compile Include="src\ChangeDifficultyUnitTest.cs" />
+    <Compile Include="src\OverallTests.cs" />
+    <Compile Include="src\TestAttackUnitTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -69,6 +67,9 @@
       <Project>{a9dcac72-bc77-4c33-be70-bbfd31d7c798}</Project>
       <Name>MyGameWin</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
